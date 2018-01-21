@@ -15,12 +15,12 @@ namespace Transformation
 	{
 	}
 
-	RegisterReference::operator size_t() const
+	RegisterReference::operator RegisterName() const
 	{
 		return reg_name;
 	}
 
-	RegisterReference::RegisterReference(std::vector<size_t>& free_custom_registers)
+	RegisterReference::RegisterReference(std::vector<RegisterName>& free_custom_registers)
 		: free_custom_registers{ free_custom_registers },
 		reg_name{ free_custom_registers.back() }
 	{

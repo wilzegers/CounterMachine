@@ -23,7 +23,7 @@ public slots:
 
 signals:
     void ProgramLoaded(const std::vector<std::string>& instructions,
-		       const boost::container::flat_map<size_t, RegisterValue>& reg_inits,
+		       const RegisterValueMap& reg_inits,
 		       size_t reg_count);
 
     void StateChanged(size_t next_instruction, const std::vector<RegisterValue>& registers);

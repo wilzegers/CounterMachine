@@ -17,6 +17,8 @@ IterT Forward(IterT iter, size_t n)
 
 using RegisterValue = size_t;
 
+using RegisterName = size_t;
+
 struct InternalError : public std::exception
 {
 	InternalError(const std::string message) : message{ "Internal Error: " + message }

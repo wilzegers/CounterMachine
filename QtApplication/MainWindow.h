@@ -23,8 +23,7 @@ public:
 
 public slots:
     void SimulationLoaded(const std::vector<std::string>& instructions,
-		       const boost::container::flat_map<size_t, RegisterValue>& reg_inits,
-		       size_t reg_count);
+		       const RegisterValueMap& reg_inits, size_t reg_count);
     void ChangeSimulationState(size_t next_instruction, const std::vector<RegisterValue>& registers);
     void EndSimulation();
     void InstructionTable_CurrentItemChanged(QTableWidgetItem *current, QTableWidgetItem *previous);

@@ -7,7 +7,7 @@ namespace Execution
 {
 
 	Computation::Computation(const Descriptors::Computation& descriptor,
-		const boost::container::flat_map<size_t, RegisterValue>& input_regs)
+		const RegisterValueMap& input_regs)
 		:
 		state{ CreateRegisters(descriptor, input_regs) },
 		result_reg{ descriptor.result_reg },
@@ -16,17 +16,16 @@ namespace Execution
 
 	}
 
-	std::vector<std::unique_ptr<Instruction>> Computation::TransformInstructions(
-		const std::vector<std::unique_ptr<Descriptors::Instruction>>& source)
+	InstructionVector Computation::TransformInstructions(const Descriptors::InstructionVector& source)
 	{
-		std::vector<std::unique_ptr<Instruction>> result;
+		InstructionVector result;
 		result.reserve(source.size());
 		boost::transform(source, std::back_inserter(result), TransformInstruction);
 		return result;
 	}
 
 	std::vector<RegisterValue> Computation::CreateRegisters(const Descriptors::Computation& descriptor,
-		const boost::container::flat_map<size_t, RegisterValue>& input_regs)
+		const RegisterValueMap& input_regs)
 	{
 		std::vector<RegisterValue> result;
 
@@ -40,8 +39,7 @@ namespace Execution
 		{
 			if (descriptor.input_regs.count(pair.first) == 0)
 			{
-				throw ExceptionNoLocation(Constants::ErrorMessages::input_reg_name_mismatch,
-					pair.first);
+				throw ExceptionNoLocation(Constants::ErrorMessages::input_reg_name_mismatch, pair.first);
 			}
 		}
 

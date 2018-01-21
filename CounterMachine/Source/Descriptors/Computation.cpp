@@ -2,10 +2,10 @@
 
 namespace Descriptors
 {
-	Computation::Computation(const std::vector<std::unique_ptr<Descriptors::Instruction>>& instructions,
-		const boost::container::flat_set<size_t>& input_regs,
-		const boost::container::flat_map<size_t, RegisterValue>& register_inits,
-		size_t result_reg,
+	Computation::Computation(const InstructionVector& instructions,
+		const RegisterNameSet& input_regs,
+		const RegisterValueMap& register_inits,
+		RegisterName result_reg,
 		size_t register_count)
 		: input_regs{ input_regs },
 		register_inits{ register_inits },

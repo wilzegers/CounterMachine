@@ -30,10 +30,10 @@ namespace Execution
 	class Increase : public Instruction
 	{
 
-		size_t register_name;
+		RegisterName register_name;
 	public:
 
-		Increase(size_t register_name) : register_name{ register_name }
+		Increase(RegisterName register_name) : register_name{ register_name }
 		{
 		}
 
@@ -46,10 +46,10 @@ namespace Execution
 	class Decrease : public Instruction
 	{
 
-		size_t register_name;
+		RegisterName register_name;
 	public:
 
-		Decrease(size_t register_name) : register_name{ register_name }
+		Decrease(RegisterName register_name) : register_name{ register_name }
 		{
 		}
 
@@ -62,10 +62,10 @@ namespace Execution
 	class Clear : public Instruction
 	{
 
-		size_t register_name;
+		RegisterName register_name;
 	public:
 
-		Clear(size_t register_name) : register_name{ register_name }
+		Clear(RegisterName register_name) : register_name{ register_name }
 		{
 		}
 
@@ -78,11 +78,11 @@ namespace Execution
 	class Copy : public Instruction
 	{
 
-		size_t from_register;
-		size_t to_register;
+		RegisterName from_register;
+		RegisterName to_register;
 	public:
 
-		Copy(size_t from_register, size_t to_register) : from_register{ from_register }, to_register{ to_register }
+		Copy(RegisterName from_register, RegisterName to_register) : from_register{ from_register }, to_register{ to_register }
 		{
 		}
 
@@ -95,11 +95,11 @@ namespace Execution
 	class JumpIfZero : public Instruction
 	{
 
-		size_t register_name;
+		RegisterName register_name;
 		size_t jump_destination;
 	public:
 
-		JumpIfZero(size_t register_name, size_t jump_destination) : register_name{ register_name }, jump_destination{ jump_destination }
+		JumpIfZero(RegisterName register_name, size_t jump_destination) : register_name{ register_name }, jump_destination{ jump_destination }
 		{
 		}
 
@@ -119,12 +119,12 @@ namespace Execution
 	class JumpIfEqual : public Instruction
 	{
 
-		size_t register_a;
-		size_t register_b;
+		RegisterName register_a;
+		RegisterName register_b;
 		size_t jump_destination;
 	public:
 
-		JumpIfEqual(size_t register_a, size_t register_b, size_t jump_destination)
+		JumpIfEqual(RegisterName register_a, RegisterName register_b, size_t jump_destination)
 			: register_a{ register_a }, register_b{ register_b }, jump_destination{ jump_destination }
 		{
 		}

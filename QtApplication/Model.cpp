@@ -59,7 +59,7 @@ void Model::TransformFile(const std::wstring& inputFile, const std::wstring& out
     DEBUGFUN();
     Processing::Parser p{inputFile};
     p.Parse();
-    std::ofstream(outputFile) << Transformation::MachineTransformer().Transform(to_set, p.GetResultComputation());
+    std::ofstream(outputFile) << Transformation::MachineTransformer{}.Transform(to_set, p.GetResultComputation());
 }
 
 void Model::Clear()

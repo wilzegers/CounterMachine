@@ -20,8 +20,8 @@ MainWindow::MainWindow(QWidget *parent) :
 	    this, SLOT(InstructionTable_CurrentItemChanged(QTableWidgetItem*,QTableWidgetItem*)));
 
     connect(&model, SIGNAL(SimulationEnded()), this, SLOT(EndSimulation()));
-    connect(&model, SIGNAL(ProgramLoaded(std::vector<std::string>,boost::container::flat_map<size_t,RegisterValue>, size_t)),
-	    this, SLOT(SimulationLoaded(std::vector<std::string>,boost::container::flat_map<size_t,RegisterValue>, size_t)));
+    connect(&model, SIGNAL(ProgramLoaded(std::vector<std::string>,RegisterValueMap, size_t)),
+	    this, SLOT(SimulationLoaded(std::vector<std::string>,RegisterValueMap, size_t)));
     connect(&model, SIGNAL(StateChanged(size_t,std::vector<RegisterValue>)),
 	this, SLOT(ChangeSimulationState(size_t,std::vector<RegisterValue>)));
 
@@ -35,7 +35,7 @@ MainWindow::~MainWindow()
 }
 
 void MainWindow::SimulationLoaded(const std::vector<std::string>& instructions,
-				  const boost::container::flat_map<size_t, RegisterValue>& reg_inits,
+				  const RegisterValueMap& reg_inits,
 				  size_t reg_count)
 {
     DEBUGFUN();

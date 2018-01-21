@@ -5,7 +5,7 @@
 #include "Utility.h"
 
 #include "Execution/Computation.h"
-#include <QDebug>
+
 #include <iostream>
 
 #define DEBUGFUN() DebugHelper __helper{__FUNCTION__}
@@ -56,7 +56,7 @@ public:
 
 private:
     Descriptors::Computation CreateDescriptor(const std::wstring& filename);
-    boost::container::flat_map<size_t, RegisterValue> ParseInputs(const std::string& input_str);
+    RegisterValueMap ParseInputs(const std::string& input_str);
 
     Descriptors::Computation comp_descriptor;
     Execution::Computation comp;

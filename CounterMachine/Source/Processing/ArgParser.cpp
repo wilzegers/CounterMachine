@@ -1,4 +1,5 @@
 #include "Processing/ArgParser.h"
+
 #include <memory>
 
 namespace Processing
@@ -20,7 +21,7 @@ namespace Processing
 	{
 		while (!lexer.IsEndOfFile())
 		{
-			size_t register_name = SafelyGetSymbolAs<Symbols::Number>()->GetInformation();
+			RegisterName register_name = SafelyGetSymbolAs<Symbols::Number>()->GetInformation();
 			lexer.ReadNextSymbol();
 
 			CurrentSymbolShouldBe<Symbols::Colon>();

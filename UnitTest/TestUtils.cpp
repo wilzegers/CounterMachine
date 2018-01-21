@@ -1,14 +1,14 @@
 #include "TestUtils.h"
 
 Descriptors::Computation MakeTrivialComputation(std::unique_ptr<Descriptors::Instruction>&& instr,
-	const std::vector<size_t>& registers_necessary)
+	const std::vector<RegisterName>& registers_necessary)
 {
-	boost::container::flat_map<size_t, RegisterValue> registers;
+	RegisterValueMap registers;
 	for (auto reg : registers_necessary)
 	{
-		registers.emplace(reg, std::hash<size_t>()(reg) % 19 + 2);
+		registers.emplace(reg, std::hash<RegisterValue>()(reg) % 19 + 2);
 	}
-	std::vector<std::unique_ptr<Descriptors::Instruction>> vec;
+	Descriptors::InstructionVector vec;
 
 	vec.push_back(instr->Clone());
 	vec.push_back(std::move(instr));
@@ -16,7 +16,7 @@ Descriptors::Computation MakeTrivialComputation(std::unique_ptr<Descriptors::Ins
 
 	return Descriptors::Computation{
 		std::move(vec),
-		boost::container::flat_set<size_t>(),
+		boost::container::flat_set<RegisterName>(),
 		registers,
 		registers_necessary.front(),
 		registers_necessary.size()
@@ -45,14 +45,14 @@ void TestCopy(size_t set)
 
 void TestJumpIfZero(size_t set)
 {
-	std::vector<std::unique_ptr<Descriptors::Instruction>> instr_vector;
+	Descriptors::InstructionVector instr_vector;
 	instr_vector.push_back(std::make_unique<Descriptors::JumpIfZero>(0, 2));
 	instr_vector.push_back(std::make_unique<Descriptors::JumpIfZero>(1, 3));
 	instr_vector.push_back(std::make_unique<Descriptors::Halt>());
 	instr_vector.push_back(std::make_unique<Descriptors::Halt>());
 
-	Descriptors::Computation base{ instr_vector, boost::container::flat_set<size_t>(), { { { 0, 1 },{ 1, 0 } } }, 0, 2 };
-	Descriptors::Computation trans_result{ Transformation::MachineTransformer().Transform(set, base) };
+	Descriptors::Computation base{ instr_vector, RegisterNameSet{}, { { { 0, 1 },{ 1, 0 } } }, 0, 2 };
+	Descriptors::Computation trans_result{ Transformation::MachineTransformer{}.Transform(set, base) };
 
 	Execution::Computation base_comp{ base, {} };
 	Execution::Computation trans_comp{ trans_result, {} };
@@ -72,14 +72,14 @@ void TestJumpIfZero(size_t set)
 
 void TestJumpIfEqual(size_t set)
 {
-	std::vector<std::unique_ptr<Descriptors::Instruction>> instr_vector;
+	Descriptors::InstructionVector instr_vector;
 	instr_vector.push_back(std::make_unique<Descriptors::JumpIfEqual>(0, 1, 2));
 	instr_vector.push_back(std::make_unique<Descriptors::JumpIfEqual>(1, 2, 3));
 	instr_vector.push_back(std::make_unique<Descriptors::Halt>());
 	instr_vector.push_back(std::make_unique<Descriptors::Halt>());
 
-	Descriptors::Computation base{ instr_vector, boost::container::flat_set<size_t>(), {{ { 0, 1 }, { 1, 0 }, { 2, 0 } }}, 0, 3 };
-	Descriptors::Computation trans_result{ Transformation::MachineTransformer().Transform(set, base) };
+	Descriptors::Computation base{ instr_vector, RegisterNameSet{}, {{ { 0, 1 }, { 1, 0 }, { 2, 0 } }}, 0, 3 };
+	Descriptors::Computation trans_result{ Transformation::MachineTransformer{}.Transform(set, base) };
 
 	Execution::Computation base_comp{ base, {} };
 	Execution::Computation trans_comp{ trans_result, {} };

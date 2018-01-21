@@ -12,10 +12,10 @@ namespace Processing
 	class ExecutionBuilder
 	{
 		size_t reg_count;
-		size_t result_reg;
-		boost::container::flat_set<size_t> input_regs;
-		boost::container::flat_map<size_t, RegisterValue> register_inits;
-		std::vector<std::unique_ptr<Descriptors::Instruction>> instructions;
+		RegisterName result_reg;
+		RegisterNameSet input_regs;
+		RegisterValueMap register_inits;
+		Descriptors::InstructionVector instructions;
 		std::function<LocationInfo()> location_request;
 
 	public:
@@ -26,17 +26,17 @@ namespace Processing
 
 		void ActOnRegisterCount(size_t register_count);
 
-		void ActOnInputReg(size_t reg_name);
+		void ActOnInputReg(RegisterName reg_name);
 
-		void ActOnOutputRegisterName(size_t result_register);
+		void ActOnOutputRegisterName(RegisterName result_register);
 
-		void ActOnInitPair(size_t register_name, RegisterValue init_value);
+		void ActOnInitPair(RegisterName register_name, RegisterValue init_value);
 
 		void ActOnInstruction(const std::string& instruction_name, const std::vector<size_t>& arguments);
 
 	private:
 
-		void EnsureRegisterUniqueness(size_t register_name) const;
+		void EnsureRegisterUniqueness(RegisterName register_name) const;
 
 		template<class Instruction>
 		void CreateInstruction(const std::string& instruction_name, const std::vector<size_t>& arguments)

@@ -10,6 +10,7 @@
 
 namespace Execution
 {
+	using InstructionVector = std::vector<std::unique_ptr<Instruction>>;
 
 	struct NoAction
 	{
@@ -19,13 +20,13 @@ namespace Execution
 	class Computation
 	{
 		State state;
-		size_t result_reg;
-		std::vector<std::unique_ptr<Instruction>> instructions;
-		size_t result{ std::numeric_limits<size_t>::max() };
+		RegisterName result_reg;
+		InstructionVector instructions;
+		RegisterValue result{ std::numeric_limits<RegisterValue>::max() };
 	public:
 
 		Computation(const Descriptors::Computation& descriptor,
-			const boost::container::flat_map<size_t, RegisterValue>& input_regs);
+			const RegisterValueMap& input_regs);
 
 		~Computation() = default;
 
@@ -81,18 +82,18 @@ namespace Execution
 			return state.IsDone();
 		}
 
-		size_t GetResult() const
+		RegisterValue GetResult() const
 		{
 			return result;
 		}
 
 	private:
-		static std::vector<std::unique_ptr<Instruction>> TransformInstructions(const std::vector<std::unique_ptr<Descriptors::Instruction>>& source);
+		static InstructionVector TransformInstructions(const Descriptors::InstructionVector& source);
 		static std::unique_ptr<Instruction> TransformInstruction(const std::unique_ptr<Descriptors::Instruction>& source);
 
 
 		static std::vector<RegisterValue> CreateRegisters(const Descriptors::Computation& descriptor,
-			const boost::container::flat_map<size_t, RegisterValue>& input_regs);
+			const RegisterValueMap& input_regs);
 	};
 
 }

@@ -5,23 +5,27 @@
 #include "BoostIncludes.h"
 #include "Descriptors/Instruction.h"
 
+using RegisterNameSet = boost::container::flat_set<RegisterName>;
+using RegisterValueMap = boost::container::flat_map<RegisterName, RegisterValue>;
+
 namespace Descriptors
 {
+	using InstructionVector = std::vector<std::unique_ptr<Instruction>>;
 
 	struct Computation
 	{
-		std::vector<std::unique_ptr<Instruction>> instructions;
-		boost::container::flat_set<size_t> input_regs;
-		boost::container::flat_map<size_t, RegisterValue> register_inits;
-		size_t result_reg;
+		InstructionVector instructions;
+		RegisterNameSet input_regs;
+		RegisterValueMap register_inits;
+		RegisterName result_reg;
 		size_t register_count;
 
 		Computation(Computation&&) = default;
 
-		Computation(const std::vector<std::unique_ptr<Descriptors::Instruction>>& instructions,
-			const boost::container::flat_set<size_t>& input_regs,
-			const boost::container::flat_map<size_t, RegisterValue>& register_inits,
-			size_t result_reg,
+		Computation(const InstructionVector& instructions,
+			const RegisterNameSet& input_regs,
+			const RegisterValueMap& register_inits,
+			RegisterName result_reg,
 			size_t register_count);
 	};
 

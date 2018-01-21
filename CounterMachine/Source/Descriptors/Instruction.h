@@ -69,10 +69,10 @@ namespace Descriptors
 
 	struct Increase : public Instruction
 	{
-		size_t reg_name;
+		RegisterName reg_name;
 		static constexpr size_t param_no{ 1 };
 
-		Increase(const size_t& reg_name)
+		Increase(RegisterName reg_name)
 			: reg_name{ reg_name }
 		{
 		}
@@ -88,10 +88,10 @@ namespace Descriptors
 
 	struct Decrease : public Instruction
 	{
-		size_t reg_name;
+		RegisterName reg_name;
 		static constexpr size_t param_no{ 1 };
 
-		Decrease(const size_t& reg_name)
+		Decrease(RegisterName reg_name)
 			: reg_name{ reg_name }
 		{
 		}
@@ -107,10 +107,10 @@ namespace Descriptors
 
 	struct Clear : public Instruction
 	{	
-		size_t reg_name;
+		RegisterName reg_name;
 		static constexpr size_t param_no{ 1 };
 		
-		Clear(const size_t& reg_name)
+		Clear(RegisterName reg_name)
 			: reg_name{ reg_name }
 		{
 		}
@@ -126,11 +126,11 @@ namespace Descriptors
 
 	struct Copy : public Instruction
 	{
-		size_t from_register;
-		size_t to_register;
+		RegisterName from_register;
+		RegisterName to_register;
 		static constexpr size_t param_no{ 2 };
 
-		Copy(const size_t& from_register, const size_t& to_register)
+		Copy(RegisterName from_register, RegisterName to_register)
 			: from_register{ from_register },
 			to_register{ to_register }
 		{
@@ -147,11 +147,11 @@ namespace Descriptors
 
 	struct JumpIfZero : public Instruction
 	{
-		size_t register_name;
+		RegisterName register_name;
 		size_t jump_destination;
 		static constexpr size_t param_no{ 2 };
 
-		JumpIfZero(const size_t& register_name, const size_t& jump_destination)
+		JumpIfZero(RegisterName register_name, RegisterName jump_destination)
 			: register_name{ register_name },
 			jump_destination{ jump_destination }
 		{
@@ -168,12 +168,12 @@ namespace Descriptors
 
 	struct JumpIfEqual : public Instruction
 	{
-		size_t register_a;
-		size_t register_b;
+		RegisterName register_a;
+		RegisterName register_b;
 		size_t jump_destination;
 		static constexpr size_t param_no{ 3 };
 
-		JumpIfEqual(const size_t& register_a, const size_t& register_b, const size_t& jump_destination)
+		JumpIfEqual(RegisterName register_a, RegisterName register_b,  size_t jump_destination)
 			: register_a{ register_a },
 			register_b{ register_b },
 			jump_destination{ jump_destination }

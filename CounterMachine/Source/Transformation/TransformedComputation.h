@@ -13,25 +13,25 @@ namespace Transformation
 
 	struct RegisterReference
 	{
-		size_t reg_name;
+		RegisterName reg_name;
 		bool to_unreg{ true };
 
 		~RegisterReference();
 
-		operator size_t() const;
+		operator RegisterName() const;
 
 		RegisterReference(const RegisterReference&) = delete;
 		RegisterReference(RegisterReference&&);
-		RegisterReference(std::vector<size_t>& free_custom_registers);
+		RegisterReference(std::vector<RegisterName>& free_custom_registers);
 
 	private:
-		std::vector<size_t>& free_custom_registers;
+		std::vector<RegisterName>& free_custom_registers;
 	};
 
 	struct TransformedComputation
 	{
-		std::vector<std::unique_ptr<Descriptors::Instruction>> instructions;
-		size_t result_reg;
+		Descriptors::InstructionVector instructions;
+		RegisterName result_reg;
 
 		TransformedComputation() = default;
 
@@ -47,7 +47,7 @@ namespace Transformation
 
 		RegisterReference RequestCustomRegister();
 
-		size_t RequestZeroRegister();
+		RegisterName RequestZeroRegister();
 
 		template<typename InstructionType>
 		void Add(InstructionType* instr)
@@ -75,10 +75,10 @@ namespace Transformation
 
 		void UpdateJumpDestination(size_t& jump_destination) const;
 
-		std::vector<size_t> free_helper_registers;
+		std::vector<RegisterName> free_helper_registers;
 		size_t register_count;
 		bool has_zero_register;
-		size_t zero_register_name;
+		RegisterName zero_register_name;
 		std::vector<size_t> new_line_locations{ { 0 } };
 		std::vector<size_t> jumps_to_update;
 		size_t current_line{ 0 };

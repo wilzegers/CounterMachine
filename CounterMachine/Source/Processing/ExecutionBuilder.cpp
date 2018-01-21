@@ -20,18 +20,18 @@ namespace Processing
 		reg_count = register_count;
 	}
 
-	void ExecutionBuilder::ActOnInputReg(size_t reg_name)
+	void ExecutionBuilder::ActOnInputReg(RegisterName reg_name)
 	{
 		EnsureRegisterUniqueness(reg_name);
 		input_regs.insert(reg_name);
 	}
 
-	void ExecutionBuilder::ActOnOutputRegisterName(size_t result_register)
+	void ExecutionBuilder::ActOnOutputRegisterName(RegisterName result_register)
 	{
 		result_reg = result_register;
 	}
 
-	void ExecutionBuilder::ActOnInitPair(size_t reg_name, RegisterValue init_value)
+	void ExecutionBuilder::ActOnInitPair(RegisterName reg_name, RegisterValue init_value)
 	{
 		EnsureRegisterUniqueness(reg_name);
 		register_inits.emplace(reg_name, init_value);
@@ -74,7 +74,7 @@ namespace Processing
 		}
 	}
 
-	void ExecutionBuilder::EnsureRegisterUniqueness(size_t register_name) const
+	void ExecutionBuilder::EnsureRegisterUniqueness(RegisterName register_name) const
 	{
 		if (register_inits.count(register_name) || input_regs.count(register_name))
 		{

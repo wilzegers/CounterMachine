@@ -28,11 +28,11 @@ namespace Execution
 
 		size_t& GetNextInstruction() { return next_instruction; }
 
-		RegisterValue& GetRegisterValue(size_t name) { return registers[name]; }
+		RegisterValue& GetRegisterValue(RegisterName name) { return registers[name]; }
 
 		const std::vector<RegisterValue>& GetRegisterValues() const { return registers; }
 
-		const RegisterValue& GetRegisterValue(size_t name) const { return registers[name]; }
+		RegisterValue GetRegisterValue(RegisterName name) const { return registers[name]; }
 
 	};
 

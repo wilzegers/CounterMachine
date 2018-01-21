@@ -12,7 +12,7 @@ namespace Processing
 
 	class ArgParser : protected ParserBase
 	{
-		boost::container::flat_map<size_t, RegisterValue> inits;
+		RegisterValueMap inits;
 
 	public:
 
@@ -22,7 +22,7 @@ namespace Processing
 
 		void Parse();
 
-		boost::container::flat_map<size_t, RegisterValue> GetInits() { return inits; }
+		RegisterValueMap GetInits() { return inits; }
 
 	private:
 
