@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Execution">
+      <UniqueIdentifier>{be7ba1a5-d35a-4c9e-874f-d4d8a8554863}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Execution\Header Files">
+      <UniqueIdentifier>{c982fdb8-2158-48fd-a23c-2f5231dc618f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Execution\Source Files">
+      <UniqueIdentifier>{e2079be9-b28c-4a5f-8042-9b7acde04a6a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Descriptors">
+      <UniqueIdentifier>{73771900-2499-42d9-9087-724d398d142a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Transformation">
+      <UniqueIdentifier>{56823310-6cce-4983-b8a6-9921ab71c2e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shared">
+      <UniqueIdentifier>{b82c871f-95ac-4ccf-98f5-271f0ad00ef2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Descriptors\Header Files">
+      <UniqueIdentifier>{c1dd18f6-c4d7-46e2-894b-b00394d0abd4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Descriptors\Source Files">
+      <UniqueIdentifier>{2c5e1040-3c23-424f-8da6-3c55273d3bcf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Transformation\Header Files">
+      <UniqueIdentifier>{3f3da9fe-1c5f-424f-9a84-4abf5297bdf3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Transformation\Source Files">
+      <UniqueIdentifier>{c5ca4427-817d-4725-8e69-b625c9191fc5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Processing">
+      <UniqueIdentifier>{945fd6a3-8c7f-46c8-835c-71c6a09bb8ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Processing\Header Files">
+      <UniqueIdentifier>{c627cb1a-1b68-494d-a2e2-4aaa8121cc67}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Processing\Source Files">
+      <UniqueIdentifier>{3c48db14-c25b-499b-971c-3fa24f6c728a}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Source\Shared\BoostIncludes.h">
+      <Filter>Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Shared\Constants.h">
+      <Filter>Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Shared\Utility.h">
+      <Filter>Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Descriptors\Computation.h">
+      <Filter>Descriptors\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Execution\Computation.h">
+      <Filter>Execution\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Execution\State.h">
+      <Filter>Execution\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Execution\Instruction.h">
+      <Filter>Execution\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Descriptors\Instruction.h">
+      <Filter>Descriptors\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Transformation\MachineTransformer.h">
+      <Filter>Transformation\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Transformation\TransformationRules.h">
+      <Filter>Transformation\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Transformation\TransformationRuleService.h">
+      <Filter>Transformation\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Transformation\TransformedComputation.h">
+      <Filter>Transformation\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Processing\ArgParser.h">
+      <Filter>Processing\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Processing\ExecutionBuilder.h">
+      <Filter>Processing\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Processing\Lexer.h">
+      <Filter>Processing\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Processing\Parser.h">
+      <Filter>Processing\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Processing\ParserBase.h">
+      <Filter>Processing\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Processing\Symbol.h">
+      <Filter>Processing\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Shared\Exceptions.h">
+      <Filter>Shared</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Source\Descriptors\Computation.cpp">
+      <Filter>Descriptors\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Execution\Computation.cpp">
+      <Filter>Execution\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Execution\State.cpp">
+      <Filter>Execution\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Transformation\MachineTransformer.cpp">
+      <Filter>Transformation\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Transformation\TransformationRules.cpp">
+      <Filter>Transformation\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Transformation\TransformedComputation.cpp">
+      <Filter>Transformation\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Processing\ArgParser.cpp">
+      <Filter>Processing\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Processing\ExecutionBuilder.cpp">
+      <Filter>Processing\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Processing\Lexer.cpp">
+      <Filter>Processing\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Processing\Parser.cpp">
+      <Filter>Processing\Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="example.cm" />
+  </ItemGroup>
+</Project>
