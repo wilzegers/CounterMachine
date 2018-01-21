@@ -24,32 +24,32 @@ INCLUDEPATH += ../CounterMachine/Source \
 SOURCES += \
         main.cpp \
         MainWindow.cpp \
-	Model.cpp \
-	ComputationHolder.cpp
+        Model.cpp \
+        ComputationHolder.cpp
 
 HEADERS += \
         MainWindow.h \
-	Model.h \
-	ComputationHolder.h \
-	../CounterMachine/Source/Descriptors/Computation.h \
-	../CounterMachine/Source/Descriptors/Instruction.h \
-	../CounterMachine/Source/Execution/Computation.h \
-	../CounterMachine/Source/Execution/Instruction.h \
-	../CounterMachine/Source/Execution/State.h \
-	../CounterMachine/Source/Processing/ArgParser.h \
-	../CounterMachine/Source/Processing/ExecutionBuilder.h \
-	../CounterMachine/Source/Processing/Lexer.h \
-	../CounterMachine/Source/Processing/Parser.h \
-	../CounterMachine/Source/Processing/ParserBase.h \
-	../CounterMachine/Source/Processing/Symbol.h \
-	../CounterMachine/Source/Shared/BoostIncludes.h \
-	../CounterMachine/Source/Shared/Constants.h \
-	../CounterMachine/Source/Shared/Exceptions.h \
-	../CounterMachine/Source/Shared/Utility.h \
-	../CounterMachine/Source/Transformation/MachineTransformer.h \
-	../CounterMachine/Source/Transformation/TransformationRules.h \
-	../CounterMachine/Source/Transformation/TransformationRuleService.h \
-	../CounterMachine/Source/Transformation/TransformedComputation.h
+        Model.h \
+        ComputationHolder.h \
+        ../CounterMachine/Source/Descriptors/Computation.h \
+        ../CounterMachine/Source/Descriptors/Instruction.h \
+        ../CounterMachine/Source/Execution/Computation.h \
+        ../CounterMachine/Source/Execution/Instruction.h \
+        ../CounterMachine/Source/Execution/State.h \
+        ../CounterMachine/Source/Processing/ArgParser.h \
+        ../CounterMachine/Source/Processing/ExecutionBuilder.h \
+        ../CounterMachine/Source/Processing/Lexer.h \
+        ../CounterMachine/Source/Processing/Parser.h \
+        ../CounterMachine/Source/Processing/ParserBase.h \
+        ../CounterMachine/Source/Processing/Symbol.h \
+        ../CounterMachine/Source/Shared/BoostIncludes.h \
+        ../CounterMachine/Source/Shared/Constants.h \
+        ../CounterMachine/Source/Shared/Exceptions.h \
+        ../CounterMachine/Source/Shared/Utility.h \
+        ../CounterMachine/Source/Transformation/MachineTransformer.h \
+        ../CounterMachine/Source/Transformation/TransformationRules.h \
+        ../CounterMachine/Source/Transformation/TransformationRuleService.h \
+        ../CounterMachine/Source/Transformation/TransformedComputation.h
 
 FORMS += \
         MainWindow.ui

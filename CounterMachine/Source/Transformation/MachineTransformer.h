@@ -8,17 +8,17 @@
 namespace Transformation
 {
 
-	class MachineTransformer
-	{
-	public:
+    class MachineTransformer
+    {
+    public:
 
-		Descriptors::Computation Transform(size_t set_number, const Descriptors::Computation& initial_state);
+        Descriptors::Computation Transform(size_t set_number, const Descriptors::Computation& initial_state);
 
-	private:
-		bool IsSkippable(InstructionType type, size_t transform_to, size_t desired_set) const;
+    private:
+        bool IsSkippable(InstructionType type, size_t transform_to, size_t desired_set) const;
 
-		TransformationRuleService service;
+        TransformationRuleService service;
 
-	};
+    };
 
 }

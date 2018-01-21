@@ -17,13 +17,13 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->stepButton, SIGNAL(released()), this, SLOT(StepButtonClicked()));
     connect(ui->runButton, SIGNAL(released()), this, SLOT(RunButtonClicked()));
     connect(ui->instructionTableWidget, SIGNAL(currentItemChanged(QTableWidgetItem*,QTableWidgetItem*)),
-	    this, SLOT(InstructionTable_CurrentItemChanged(QTableWidgetItem*,QTableWidgetItem*)));
+        this, SLOT(InstructionTable_CurrentItemChanged(QTableWidgetItem*,QTableWidgetItem*)));
 
     connect(&model, SIGNAL(SimulationEnded()), this, SLOT(EndSimulation()));
     connect(&model, SIGNAL(ProgramLoaded(std::vector<std::string>,RegisterValueMap, size_t)),
-	    this, SLOT(SimulationLoaded(std::vector<std::string>,RegisterValueMap, size_t)));
+        this, SLOT(SimulationLoaded(std::vector<std::string>,RegisterValueMap, size_t)));
     connect(&model, SIGNAL(StateChanged(size_t,std::vector<RegisterValue>)),
-	this, SLOT(ChangeSimulationState(size_t,std::vector<RegisterValue>)));
+    this, SLOT(ChangeSimulationState(size_t,std::vector<RegisterValue>)));
 
     SetupFileInputConnection(ui->fileNameLineEdit, ui->browseButton);
     SetupFileInputConnection(ui->fileNameLineEdit_2, ui->browseButton_2);
@@ -35,8 +35,8 @@ MainWindow::~MainWindow()
 }
 
 void MainWindow::SimulationLoaded(const std::vector<std::string>& instructions,
-				  const RegisterValueMap& reg_inits,
-				  size_t reg_count)
+                  const RegisterValueMap& reg_inits,
+                  size_t reg_count)
 {
     DEBUGFUN();
     ui->runButton->setEnabled(true);
@@ -46,8 +46,8 @@ void MainWindow::SimulationLoaded(const std::vector<std::string>& instructions,
     SetupInstructionTableContent();
     SetupRegisterTableContentFrom([this, &reg_inits](const size_t i)
     {
-	auto result = reg_inits.find(i);
-	return result == reg_inits.end() ? "?" : QString::number(result->second);
+    auto result = reg_inits.find(i);
+    return result == reg_inits.end() ? "?" : QString::number(result->second);
     }, reg_count);
 }
 
@@ -61,7 +61,7 @@ void MainWindow::ChangeSimulationState(size_t next_instruction, const std::vecto
 
     SetupRegisterTableContentFrom([this](const size_t i)
     {
-	return QString::number(register_values[i]);
+    return QString::number(register_values[i]);
     }, register_values.size());
 }
 
@@ -78,8 +78,8 @@ void MainWindow::InstructionTable_CurrentItemChanged(QTableWidgetItem *current, 
     DEBUGFUN();
     if(previous)
     {
-	previous->setBackground(Qt::GlobalColor::white);
-	previous->setTextColor(Qt::GlobalColor::black);
+    previous->setBackground(Qt::GlobalColor::white);
+    previous->setTextColor(Qt::GlobalColor::black);
     }
     ui->instructionTableWidget->scrollToItem(current);
     current->setBackground(Qt::GlobalColor::black);
@@ -93,7 +93,7 @@ void MainWindow::SimulationLoadButtonClicked()
     std::string input_str{ ui->inputParamsLineEdit->text().toStdString() };
 
     CallSafely([&](){
-	model.OpenFile(filename, input_str);
+    model.OpenFile(filename, input_str);
     });
 }
 
@@ -102,27 +102,27 @@ void MainWindow::TransformationStartButtonClicked()
     DEBUGFUN();
     std::wstring inputFile{ ui->fileNameLineEdit_2->text().toStdWString() };
     size_t set = ui->group1Selector->isChecked() ? 1 :
-	(ui->group2Selector->isChecked() ? 2 : 3);
+    (ui->group2Selector->isChecked() ? 2 : 3);
     QFileDialog dialog;
     dialog.setFileMode(QFileDialog::AnyFile);
     std::wstring outputFile = dialog.getSaveFileName(NULL, "Create New File","","").toStdWString();
 
     CallSafely([&](){
-	model.TransformFile(inputFile, outputFile, set);
+    model.TransformFile(inputFile, outputFile, set);
     });
 }
 void MainWindow::StepButtonClicked()
 {
     DEBUGFUN();
     CallSafely([&](){
-	model.StepProgram();
+    model.StepProgram();
     });
 }
 void MainWindow::RunButtonClicked()
 {
     DEBUGFUN();
     CallSafely([&](){
-	model.RunProgram();
+    model.RunProgram();
     });
 }
 
@@ -135,10 +135,10 @@ void MainWindow::SetupInstructionTableContent()
 
     for (size_t i = 0; i < instruction_strings.size(); ++i)
     {
-	auto item = new QTableWidgetItem{ QString::number(i) + ". " + QString::fromStdString(instruction_strings[i]) };
-	item->setBackground(Qt::GlobalColor::white);
-	item->setTextColor(Qt::GlobalColor::black);
-	ui->instructionTableWidget->setItem(i, 0, item);
+    auto item = new QTableWidgetItem{ QString::number(i) + ". " + QString::fromStdString(instruction_strings[i]) };
+    item->setBackground(Qt::GlobalColor::white);
+    item->setTextColor(Qt::GlobalColor::black);
+    ui->instructionTableWidget->setItem(i, 0, item);
     }
 
     ui->instructionTableWidget->setCurrentCell(0, 0);
@@ -149,11 +149,11 @@ void MainWindow::SetupFileInputConnection(QLineEdit *fileNameBox, QPushButton *b
 
     DEBUGFUN();
     connect(browseButton, &QPushButton::released,
-	[fileNameBox]()
-	{
-	    QFileDialog dialog;
-	    dialog.setFileMode(QFileDialog::ExistingFile);
-	    QString outputFile{ dialog.getOpenFileName(NULL, "Open Program","","") };
-	    fileNameBox->setText(outputFile);
-	});
+    [fileNameBox]()
+    {
+        QFileDialog dialog;
+        dialog.setFileMode(QFileDialog::ExistingFile);
+        QString outputFile{ dialog.getOpenFileName(NULL, "Open Program","","") };
+        fileNameBox->setText(outputFile);
+    });
 }

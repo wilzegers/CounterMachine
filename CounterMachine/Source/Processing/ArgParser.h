@@ -10,23 +10,23 @@
 namespace Processing
 {
 
-	class ArgParser : protected ParserBase
-	{
-		RegisterValueMap inits;
+    class ArgParser : protected ParserBase
+    {
+        RegisterValueMap inits;
 
-	public:
+    public:
 
-		ArgParser(int argc, char* argv[]);
+        ArgParser(int argc, char* argv[]);
 
-		ArgParser(const std::string& args);
+        ArgParser(const std::string& args);
 
-		void Parse();
+        void Parse();
 
-		RegisterValueMap GetInits() { return inits; }
+        RegisterValueMap GetInits() { return inits; }
 
-	private:
+    private:
 
-		static std::unique_ptr<std::istream> MakeArgStream(int argc, char* argv[]);
-	};
+        static std::unique_ptr<std::istream> MakeArgStream(int argc, char* argv[]);
+    };
 
 }

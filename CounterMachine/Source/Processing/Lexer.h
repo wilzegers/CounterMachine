@@ -8,53 +8,53 @@
 namespace Processing
 {
 
-	class Lexer
-	{
-		std::unique_ptr<Symbol> current{ nullptr };
-		std::unique_ptr<std::istream> stream;
-		bool eof{ true };
-		size_t line_number{ 1 };
-		const char* name;
+    class Lexer
+    {
+        std::unique_ptr<Symbol> current{ nullptr };
+        std::unique_ptr<std::istream> stream;
+        bool eof{ true };
+        size_t line_number{ 1 };
+        const char* name;
 
-	public:
+    public:
 
-		Lexer(const char* name, std::unique_ptr<std::istream>&& stream);
+        Lexer(const char* name, std::unique_ptr<std::istream>&& stream);
 
-		class UnexpectedCharException : public std::exception
-		{
-			std::string message;
+        class UnexpectedCharException : public std::exception
+        {
+            std::string message;
 
-		public:
+        public:
 
-			UnexpectedCharException(const char* name, size_t line_number, char c);
+            UnexpectedCharException(const char* name, size_t line_number, char c);
 
-			virtual const char* what() const override { return message.c_str(); }
-		};
+            virtual const char* what() const override { return message.c_str(); }
+        };
 
-		void ReadNextSymbol();
+        void ReadNextSymbol();
 
-		const ViewPtr<Symbol> GetCurrentSymbol() const { return MakeView(current); }
+        const ViewPtr<Symbol> GetCurrentSymbol() const { return MakeView(current); }
 
-		bool IsEndOfFile() const { return eof; }
+        bool IsEndOfFile() const { return eof; }
 
-		size_t GetLineNumber() const;
+        size_t GetLineNumber() const;
 
-	private:
+    private:
 
-		void ReadLabel();
+        void ReadLabel();
 
-		void ReadInstructionName();
+        void ReadInstructionName();
 
-		void ReadNumber();
+        void ReadNumber();
 
-		void ReadCharSymbol();
+        void ReadCharSymbol();
 
-		void EatSpace();
+        void EatSpace();
 
-		void CheckForNewLine();
+        void CheckForNewLine();
 
-		template<class Pred>
-		std::string GetWhile(Pred predicate);
-	};
+        template<class Pred>
+        std::string GetWhile(Pred predicate);
+    };
 
 }

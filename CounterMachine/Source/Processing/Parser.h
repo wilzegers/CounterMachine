@@ -15,35 +15,35 @@
 namespace Processing
 {
 
-	class Parser : protected ParserBase
-	{
-		ExecutionBuilder builder{ std::bind(&ParserBase::GetLocationInfo, static_cast<ParserBase*>(this)) };
+    class Parser : protected ParserBase
+    {
+        ExecutionBuilder builder{ std::bind(&ParserBase::GetLocationInfo, static_cast<ParserBase*>(this)) };
 
-	public:
+    public:
 
-		Parser(const std::wstring filename);
+        Parser(const std::wstring filename);
 
-		void Parse();
+        void Parse();
 
-		Descriptors::Computation GetResultComputation();
+        Descriptors::Computation GetResultComputation();
 
-	private:
+    private:
 
-		void ParseConfiguration();
+        void ParseConfiguration();
 
-		void ParseOutputReg();
+        void ParseOutputReg();
 
-		void ParseRegNumber();
+        void ParseRegNumber();
 
-		void ParseRegInit();
+        void ParseRegInit();
 
-		void ParseProgram();
+        void ParseProgram();
 
-		void ParseInstruction();
+        void ParseInstruction();
 
-		static std::unique_ptr<std::istream> SafelyOpenFile(const std::wstring& filename);
+        static std::unique_ptr<std::istream> SafelyOpenFile(const std::wstring& filename);
 
-		std::vector<size_t> ParseArguments();
-	};
+        std::vector<size_t> ParseArguments();
+    };
 
 }
