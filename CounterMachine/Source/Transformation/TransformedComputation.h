@@ -83,7 +83,13 @@ namespace Transformation
         std::vector<size_t> jumps_to_update;
         size_t current_line{ 0 };
         size_t currently_added_lines{ 0 };
-        size_t in_rule_call_count{ 0 };
     };
 
+    struct RuleGuard
+    {
+        RuleGuard(TransformedComputation& comp);
+        ~RuleGuard();
+    private:
+        TransformedComputation& comp;
+    };
 }

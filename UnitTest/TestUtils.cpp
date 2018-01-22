@@ -16,7 +16,7 @@ Descriptors::Computation MakeTrivialComputation(std::unique_ptr<Descriptors::Ins
 
     return Descriptors::Computation{
         std::move(vec),
-        boost::container::flat_set<RegisterName>(),
+        RegisterNameSet{},
         registers,
         registers_necessary.front(),
         registers_necessary.size()

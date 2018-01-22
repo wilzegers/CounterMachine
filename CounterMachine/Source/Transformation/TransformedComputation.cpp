@@ -97,20 +97,12 @@ namespace Transformation
 
     void TransformedComputation::StartRule()
     {
-        ++in_rule_call_count;
-        if (in_rule_call_count == 1)
-        {
-            currently_added_lines = 0;
-        }
+        currently_added_lines = 0;
     }
 
     void TransformedComputation::EndRule()
     {
-        --in_rule_call_count;
-        if (in_rule_call_count == 0)
-        {
-            new_line_locations.push_back(new_line_locations.back() + currently_added_lines);
-        }
+        new_line_locations.push_back(new_line_locations.back() + currently_added_lines);
     }
 
     void TransformedComputation::SkipInstruction(std::unique_ptr<Descriptors::Instruction>&& instr)
@@ -141,6 +133,16 @@ namespace Transformation
     void TransformedComputation::UpdateJumpDestination(size_t& jump_destination) const
     {
         jump_destination = new_line_locations[jump_destination];
+    }
+
+    RuleGuard::RuleGuard(TransformedComputation& comp) : comp{ comp }
+    {
+        comp.StartRule();
+    }
+
+    RuleGuard::~RuleGuard()
+    {
+        comp.EndRule();
     }
 
 }

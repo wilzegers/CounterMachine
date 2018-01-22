@@ -16,36 +16,41 @@ namespace Transformation
         TransformedComputation transformed{ initial_state };
         for (size_t i = 0; i < desired_set; ++i)
         {
-            TransformedComputation temp;
-            temp.ReadRegistersFrom(transformed);
+            bool changed;
+            do {
+                changed = false;
+                TransformedComputation temp;
+                temp.ReadRegistersFrom(transformed);
 
-            for (auto& current_instruction : transformed.instructions)
-            {
-                InstructionType instruction_type = current_instruction->GetType();
+                for (auto& current_instruction : transformed.instructions)
+                {
+                    InstructionType instruction_type = current_instruction->GetType();
 
-                bool will_transform_later = std::any_of(Forward(service.GetSets().begin(), i),
-                    Forward(service.GetSets().begin(), desired_set), [=](auto set)
+                    bool will_transform_later = std::any_of(Forward(service.GetSets().begin(), i),
+                        Forward(service.GetSets().begin(), desired_set), [=](auto set)
                     {
                         return set.count(instruction_type) != 0;
                     });
 
-                bool no_need_to_transform = service.GetSets()[desired_set - 1].find(instruction_type)
-                    != service.GetSets()[desired_set - 1].end();
+                    bool no_need_to_transform = service.GetSets()[desired_set - 1].find(instruction_type)
+                        != service.GetSets()[desired_set - 1].end();
 
-                bool skippable = instruction_type == InstructionType::Halt
-                    || will_transform_later || no_need_to_transform;
+                    bool skippable = instruction_type == InstructionType::Halt
+                        || will_transform_later || no_need_to_transform;
 
-                if (skippable)
-                {
-                    service.GetSkip()(temp, std::move(current_instruction));
+                    if (skippable)
+                    {
+                        service.GetSkip()(temp, std::move(current_instruction));
+                    }
+                    else
+                    {
+                        changed = true;
+                        service.GetRuleFor(i, instruction_type)(temp, std::move(current_instruction));
+                    }
                 }
-                else
-                {
-                    service.GetRuleFor(i, instruction_type)(temp, std::move(current_instruction));
-                }
-            }
-            temp.FinishedTransformationIteration();
-            transformed = std::move(temp);
+                temp.FinishedTransformationIteration();
+                transformed = std::move(temp);
+            } while (changed);
         }
 
         Descriptors::Computation result{ transformed.instructions, initial_state.input_regs, initial_state.register_inits,

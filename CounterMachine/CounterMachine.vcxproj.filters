@@ -132,7 +132,4 @@
       <Filter>Processing\Source Files</Filter>
     </ClCompile>
   </ItemGroup>
-  <ItemGroup>
-    <None Include="example.cm" />
-  </ItemGroup>
 </Project>
