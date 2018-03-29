@@ -1,6 +1,6 @@
 #pragma once
 
-// This header exists to stop getting warnings from the Boost lib.
+// This header exists to stop getting warnings from the Boost library.
 
 #pragma warning (push, 0)
 

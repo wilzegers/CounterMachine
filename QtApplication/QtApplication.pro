@@ -36,7 +36,7 @@ HEADERS += \
         ../CounterMachine/Source/Execution/Computation.h \
         ../CounterMachine/Source/Execution/Instruction.h \
         ../CounterMachine/Source/Execution/State.h \
-        ../CounterMachine/Source/Processing/ArgParser.h \
+	../CounterMachine/Source/Processing/InputParser.h \
         ../CounterMachine/Source/Processing/ExecutionBuilder.h \
         ../CounterMachine/Source/Processing/Lexer.h \
         ../CounterMachine/Source/Processing/Parser.h \

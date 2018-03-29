@@ -13,6 +13,10 @@ namespace Transformation
 
     RegisterReference::~RegisterReference()
     {
+        if (to_unreg)
+        {
+            free_helper_registers.push_back(reg_name);
+        }
     }
 
     RegisterReference::operator RegisterName() const
@@ -21,19 +25,26 @@ namespace Transformation
     }
 
     RegisterReference::RegisterReference(std::vector<RegisterName>& free_custom_registers)
-        : free_custom_registers{ free_custom_registers },
+        : free_helper_registers{ free_custom_registers },
         reg_name{ free_custom_registers.back() }
     {
-        if (to_unreg)
-        {
-            free_custom_registers.pop_back();
-        }
+         free_custom_registers.pop_back();
     }
 
     RegisterReference::RegisterReference(RegisterReference&& other)
-        : free_custom_registers{ other.free_custom_registers }
+        : free_helper_registers{ other.free_helper_registers }
     {
         other.to_unreg = false;
+    }
+
+    Descriptors::InstructionVector& TransformedComputation::GetInstructions()
+    {
+        return instructions;
+    }
+    
+    const Descriptors::InstructionVector& TransformedComputation::GetInstructions() const
+    {
+        return instructions;
     }
 
     TransformedComputation::TransformedComputation(const Descriptors::Computation& descriptor)
@@ -47,11 +58,8 @@ namespace Transformation
     TransformedComputation& TransformedComputation::operator=(TransformedComputation&& other)
     {
         instructions = std::move(other.instructions);
-        register_count = other.register_count;
-        result_reg = other.result_reg;
-        has_zero_register = other.has_zero_register;
-        zero_register_name = other.zero_register_name;
         free_helper_registers = other.free_helper_registers;
+        ReadRegistersFrom(other);
 
         return *this;
     }
@@ -76,13 +84,13 @@ namespace Transformation
         return register_count;
     }
 
-    RegisterReference TransformedComputation::RequestCustomRegister()
+    RegisterReference TransformedComputation::RequestHelperRegister()
     {
         if (free_helper_registers.size() == 0)
         {
             free_helper_registers.push_back(register_count++);
         }
-        return{ free_helper_registers };
+        return { free_helper_registers };
     }
 
     size_t TransformedComputation::RequestZeroRegister()

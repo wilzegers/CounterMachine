@@ -1,23 +1,21 @@
-#include "Processing/ArgParser.h"
-
-#include <memory>
+#include "Processing/InputParser.h"
 
 namespace Processing
 {
 
-    ArgParser::ArgParser(int argc, char* argv[])
+    InputParser::InputParser(int argc, char* argv[])
         : ParserBase{ MakeArgStream(argc, argv), Constants::Locations::parameters }
     {
     }
 
 
-    ArgParser::ArgParser(const std::string& args)
+    InputParser::InputParser(const std::string& args)
         : ParserBase{ std::make_unique<std::stringstream>(args), Constants::Locations::parameters }
     {
     }
 
 
-    void ArgParser::Parse()
+    void InputParser::Parse()
     {
         while (!lexer.IsEndOfFile())
         {
@@ -35,7 +33,7 @@ namespace Processing
     }
 
 
-    std::unique_ptr<std::istream> ArgParser::MakeArgStream(int argc, char* argv[])
+    std::unique_ptr<std::istream> InputParser::MakeArgStream(int argc, char* argv[])
     {
         auto stream = std::make_unique<std::stringstream>();
         for (int i = 1; i < argc; ++i)

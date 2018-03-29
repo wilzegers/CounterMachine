@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "Execution/State.h"
 #include "Constants.h"
@@ -7,32 +7,44 @@
 
 namespace Execution
 {
-
-    class Instruction
+    /// A végrehajtható utasítások közös őse.
+    struct Instruction
     {
-    public:
+        /// Az utasítás végrehajtása
+        /**
+        * \param state a módosítandó programállapot.
+        */
         void Execute(State& state)
         {
             ChangeRegisters(state);
             ToNextInstruction(state);
         }
 
-        virtual void ChangeRegisters(State&/* state*/) {}
+        /// Az utasítás kihatása a regiszterek állapotára.
+        /**
+        * Alapértelmezett viselkedésben nem csinál semmit.
+        */
+        virtual void ChangeRegisters(State& /*state*/) {}
 
+        /// Az utasítás kihatása a következő utasítás sorszámára.
+        /**
+        * Alapértelmezett viselkedésben a következőre áll.
+        */
         virtual void ToNextInstruction(State& state)
         {
             ++state.GetNextInstruction();
         }
     };
 
-
-
-    class Increase : public Instruction
+    /// A végrehajtható Increase utasítás.
+    struct Increase : public Instruction
     {
+        RegisterName register_name; ///< a növelendő regiszter címe.
 
-        RegisterName register_name;
-    public:
-
+        /// Konstruktor.
+        /**
+        * \param register_name a növelendő regiszter címe.
+        */
         Increase(RegisterName register_name) : register_name{ register_name }
         {
         }
@@ -43,12 +55,15 @@ namespace Execution
         }
     };
 
-    class Decrease : public Instruction
+    /// A végrehajtható Decrease utasítás.
+    struct Decrease : public Instruction
     {
+        RegisterName register_name; ///< a csökkentendő regiszter címe.
 
-        RegisterName register_name;
-    public:
-
+        /// Konstruktor.
+        /**
+        * \param register_name a csökkentendő regiszter címe.
+        */
         Decrease(RegisterName register_name) : register_name{ register_name }
         {
         }
@@ -59,12 +74,15 @@ namespace Execution
         }
     };
 
-    class Clear : public Instruction
+    /// A végrehajtható Clear utasítás.
+    struct Clear : public Instruction
     {
+        RegisterName register_name; ///< a kinullázandó regiszter címe.
 
-        RegisterName register_name;
-    public:
-
+        /// Konstruktor.
+        /**
+        * \param register_name a kinullázandó regiszter címe.
+        */
         Clear(RegisterName register_name) : register_name{ register_name }
         {
         }
@@ -75,13 +93,17 @@ namespace Execution
         }
     };
 
-    class Copy : public Instruction
+    /// A végrehajtható Copy utasítás.
+    struct Copy : public Instruction
     {
+        RegisterName from_register; ///< a forrás regiszter címe.
+        RegisterName to_register;   ///< a cél regiszter címe.
 
-        RegisterName from_register;
-        RegisterName to_register;
-    public:
-
+        /// Konstruktor.
+        /**
+        * \param from_register a forrás regiszter címe.
+        * \param to_register a cél regiszter címe.
+        */
         Copy(RegisterName from_register, RegisterName to_register) : from_register{ from_register }, to_register{ to_register }
         {
         }
@@ -92,13 +114,17 @@ namespace Execution
         }
     };
 
-    class JumpIfZero : public Instruction
+    /// A végrehajtható Jump If Zero utasítás.
+    struct JumpIfZero : public Instruction
     {
+        RegisterName register_name; ///< a feltétel-regiszter címe.
+        size_t jump_destination;    ///< az ugrás célja.
 
-        RegisterName register_name;
-        size_t jump_destination;
-    public:
-
+        /// Konstruktor.
+        /**
+        * \param register_name a feltétel regiszter címe.
+        * \param jump_destination az ugrás célja.
+        */
         JumpIfZero(RegisterName register_name, size_t jump_destination) : register_name{ register_name }, jump_destination{ jump_destination }
         {
         }
@@ -116,14 +142,19 @@ namespace Execution
         }
     };
 
-    class JumpIfEqual : public Instruction
+    /// A végrehajtható Jump If Equal utasítás.
+    struct JumpIfEqual : public Instruction
     {
+        RegisterName register_a; ///< az egyik összehasonlítandó regiszter címe.
+        RegisterName register_b; ///< a másik összehasonlítandó regiszter címe.
+        size_t jump_destination; ///< az ugrás célja.
 
-        RegisterName register_a;
-        RegisterName register_b;
-        size_t jump_destination;
-    public:
-
+        /// Konstruktor.
+        /**
+        * \param register_a az egyik összehasonlítandó regiszter címe.
+        * \param register_b a másik összehasonlítandó regiszter címe.
+        * \param jump_destination az ugrás célja.
+        */
         JumpIfEqual(RegisterName register_a, RegisterName register_b, size_t jump_destination)
             : register_a{ register_a }, register_b{ register_b }, jump_destination{ jump_destination }
         {
@@ -142,14 +173,9 @@ namespace Execution
         }
     };
 
-
-    class Halt : public Instruction
+    /// A végrehajtható Halt utasítás.
+    struct Halt : public Instruction
     {
-
-    public:
-
-        Halt() {}
-
         virtual void ToNextInstruction(State& state) override
         {
             state.Halt();

@@ -121,18 +121,6 @@ namespace Processing
         }
     }
 
-    template<class Pred>
-    std::string Lexer::GetWhile(Pred predicate)
-    {
-        std::stringstream ss;
-        while (predicate(stream->peek()))
-        {
-            CheckForNewLine();
-            ss << static_cast<char>(stream->get());
-        }
-        return ss.str();
-    }
-
 
     size_t Lexer::GetLineNumber() const
     {

@@ -5,39 +5,39 @@
 namespace Processing
 {
 
-    ExecutionBuilder::ExecutionBuilder(std::function<LocationInfo()> location_request) :
+    ComputationBuilder::ComputationBuilder(std::function<LocationInfo()> location_request) :
         location_request{ location_request }
     {
     }
 
-    Descriptors::Computation ExecutionBuilder::CreateComputation()
+    Descriptors::Computation ComputationBuilder::CreateComputation()
     {
         return Descriptors::Computation{ instructions, input_regs, register_inits, result_reg, reg_count };
     }
 
-    void ExecutionBuilder::ActOnRegisterCount(size_t register_count)
+    void ComputationBuilder::ActOnRegisterCount(size_t register_count)
     {
         reg_count = register_count;
     }
 
-    void ExecutionBuilder::ActOnInputReg(RegisterName reg_name)
+    void ComputationBuilder::ActOnInputReg(RegisterName reg_name)
     {
         EnsureRegisterUniqueness(reg_name);
         input_regs.insert(reg_name);
     }
 
-    void ExecutionBuilder::ActOnOutputRegisterName(RegisterName result_register)
+    void ComputationBuilder::ActOnOutputRegisterName(RegisterName result_register)
     {
         result_reg = result_register;
     }
 
-    void ExecutionBuilder::ActOnInitPair(RegisterName reg_name, RegisterValue init_value)
+    void ComputationBuilder::ActOnInitPair(RegisterName reg_name, RegisterValue init_value)
     {
         EnsureRegisterUniqueness(reg_name);
         register_inits.emplace(reg_name, init_value);
     }
 
-    void ExecutionBuilder::ActOnInstruction(const std::string& instruction_name, const std::vector<size_t>& arguments)
+    void ComputationBuilder::ActOnInstruction(const std::string& instruction_name, const std::vector<size_t>& arguments)
     {
         if (instruction_name == Constants::Instructions::clear)
         {
@@ -74,7 +74,7 @@ namespace Processing
         }
     }
 
-    void ExecutionBuilder::EnsureRegisterUniqueness(RegisterName register_name) const
+    void ComputationBuilder::EnsureRegisterUniqueness(RegisterName register_name) const
     {
         if (register_inits.count(register_name) || input_regs.count(register_name))
         {

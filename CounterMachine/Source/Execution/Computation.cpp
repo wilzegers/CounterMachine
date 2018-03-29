@@ -7,13 +7,11 @@ namespace Execution
 {
 
     Computation::Computation(const Descriptors::Computation& descriptor,
-        const RegisterValueMap& input_regs)
-        :
+        const RegisterValueMap& input_regs) :
         state{ CreateRegisters(descriptor, input_regs) },
         result_reg{ descriptor.result_reg },
         instructions{ TransformInstructions(descriptor.instructions) }
     {
-
     }
 
     InstructionVector Computation::TransformInstructions(const Descriptors::InstructionVector& source)

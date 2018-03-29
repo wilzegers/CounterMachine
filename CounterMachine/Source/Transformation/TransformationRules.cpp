@@ -21,7 +21,7 @@ namespace Transformation
 
         auto actual_instr = instr->As<Descriptors::Clear>();
 
-        size_t instruction_number = comp.instructions.size();
+        size_t instruction_number = comp.GetInstructions().size();
 
         auto zero = comp.RequestZeroRegister();
 
@@ -36,11 +36,11 @@ namespace Transformation
 
         auto actual_instr = instr->As<Descriptors::Copy>();
         auto zero = comp.RequestZeroRegister();
-        auto custom = comp.RequestCustomRegister();
+        auto custom = comp.RequestHelperRegister();
 
         comp.Add(new Descriptors::Clear{ actual_instr->to_register });
 
-        size_t algo_start = comp.instructions.size();
+        size_t algo_start = comp.GetInstructions().size();
 
         comp.Add(new Descriptors::JumpIfZero{ actual_instr->from_register, algo_start + 5 });       // 0
         comp.Add(new Descriptors::Decrease{ actual_instr->from_register });                         // 1
@@ -61,13 +61,13 @@ namespace Transformation
         auto actual_instr = instr->As<Descriptors::JumpIfEqual>();
 
         auto zero = comp.RequestZeroRegister();
-        auto custom1 = comp.RequestCustomRegister();
-        auto custom2 = comp.RequestCustomRegister();
+        auto custom1 = comp.RequestHelperRegister();
+        auto custom2 = comp.RequestHelperRegister();
 
         comp.Add(new Descriptors::Copy{ actual_instr->register_a, custom1 });
         comp.Add(new Descriptors::Copy{ actual_instr->register_b, custom2 });
 
-        size_t algo_start = comp.instructions.size();
+        size_t algo_start = comp.GetInstructions().size();
 
         comp.Add(new Descriptors::JumpIfZero{ custom1, algo_start + 5 });                               // 0
         comp.Add(new Descriptors::JumpIfZero{ custom2, algo_start + 6 });                               // 1
@@ -86,11 +86,11 @@ namespace Transformation
 
         auto actual_instr = instr->As<Descriptors::Decrease>();
 
-        auto custom1 = comp.RequestCustomRegister();
-        auto custom2 = comp.RequestCustomRegister();
+        auto custom1 = comp.RequestHelperRegister();
+        auto custom2 = comp.RequestHelperRegister();
         auto zero = comp.RequestZeroRegister();
 
-        size_t algo_start = comp.instructions.size();
+        size_t algo_start = comp.GetInstructions().size();
 
         comp.Add(new Descriptors::JumpIfEqual{ actual_instr->reg_name, custom1, algo_start + 3 });  // 0
         comp.Add(new Descriptors::Increase{ custom1 });                                             // 1

@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include <string>
 #include "Constants.h"
@@ -7,6 +7,7 @@
 namespace Processing
 {
 
+    /// A különféle szimbólum-típusokat reprezentáló felsorolási típus.
     enum class SymbolType
     {
         Label,
@@ -19,18 +20,46 @@ namespace Processing
         Comma
     };
 
-    class Symbol
+    /// A szimbólumok közös őse.
+    struct Symbol
     {
-    public:
+        /// Virtuális destruktor.
+        virtual ~Symbol() = default;
 
+        /// A szimbólum típusát lekérő függvény
+        /**
+        * \return A szimbólum típusa.
+        */
         virtual SymbolType GetType() const = 0;
 
+        /// A szimbólumtípus leírását lekérő függvény
+        /** 
+        * \return A szimbólumtípus leírása.
+        */
         virtual const char* GetTypeDescription() const = 0;
 
+        /// A szimbólumban lévő információ lekérése stringként.
+        /**
+        * \return A szimbólum információja string formában.
+        */
         virtual std::string GetInfoString() const = 0;
 
-        virtual ~Symbol() {}
+        /// A függvénnyel lekérhető, hogy az adott típusú-e a szimbólum.
+        /**
+        * \tparam ExactSymbol a típus, amivel az egyezés kérdéses
+        * \return Igaz, ha a kérdezett típusú az szimbólum.
+        */
+        template<class ExactSymbol>
+        bool IsA() const
+        {
+            return ExactSymbol::type_enum == GetType();
+        }
 
+        /// Ellenőrzötten az adott típussá castolja a konstans szimbólumot.
+        /** Ha nem ExactSymbol típusú az objektum, akkor belső hibajelzés történik.
+        *  \tparam ExactSymbol a cast céltípus.
+        *  \return Megfelelő típusú pointer.
+        */
         template<class ExactSymbol>
         ViewPtr<const ExactSymbol> As() const
         {
@@ -41,16 +70,9 @@ namespace Processing
 
             return static_cast<ViewPtr<const ExactSymbol>>(this);
         }
-
-        template<class ExactSymbol>
-        bool IsA() const
-        {
-            return ExactSymbol::type_enum == GetType();
-        }
     };
 
-#define DEFINE_SYMBOL(Type, Description, InfoType) class Type; \
-class Type : public Symbol {  \
+#define DEFINE_SYMBOL(Type, Description, InfoType) class Type : public Symbol {  \
     InfoType information; \
 public: \
     static constexpr SymbolType type_enum = SymbolType::Type; \

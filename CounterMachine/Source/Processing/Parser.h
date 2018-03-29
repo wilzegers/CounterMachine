@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include <sstream>
 #include <fstream>
@@ -15,35 +15,60 @@
 namespace Processing
 {
 
-    class Parser : protected ParserBase
+
+    /// A számlálógép kódjának a parsere.
+    struct Parser : protected ParserBase
     {
-        ExecutionBuilder builder{ std::bind(&ParserBase::GetLocationInfo, static_cast<ParserBase*>(this)) };
-
-    public:
-
+        /// File feldolgozására készült konstruktor.
+        /**
+        * \param filename a feldolgozandó file neve.
+        */
         Parser(const std::wstring filename);
 
+        /// Parser futtatása.
         void Parse();
 
+        /// A parseolt számlálógép leírójának a kinyerése.
+        /**
+        * \return A parseolt számlálógép leírója.
+        */
         Descriptors::Computation GetResultComputation();
 
     private:
 
-        void ParseConfiguration();
-
-        void ParseOutputReg();
-
-        void ParseRegNumber();
-
-        void ParseRegInit();
-
-        void ParseProgram();
-
-        void ParseInstruction();
-
+        /// A Fájl biztonságos megnyitása, ha nem létezik, megfelelő hibát dob.
+        /**
+        * \param filename a feldolgozandó file neve.
+        * \return A megnyitott filestream.
+        */
         static std::unique_ptr<std::istream> SafelyOpenFile(const std::wstring& filename);
 
+        /// Argumentumok parseolása.
+        /**
+        * \return A parsolt argumentumok.
+        */
         std::vector<size_t> ParseArguments();
+
+        /// A számlálógép adatainak parseolása.
+        void ParseConfiguration();
+
+        /// A kimeneti regiszter parseolása.
+        void ParseOutputReg();
+
+        /// A regiszterszám parseolása.
+        void ParseRegNumber();
+
+        /// A számlálógép regiszter-inicializálásának parseolása.
+        void ParseRegInit();
+
+        /// A számlálógép utasításainak parseolása.
+        void ParseProgram();
+
+        /// Egy számlálógép-utasítás parseolása.
+        void ParseInstruction();
+
+        /// Member used for building the computation descriptor
+        ComputationBuilder builder{ std::bind(&ParserBase::GetLocationInfo, static_cast<ParserBase*>(this)) };
     };
 
 }
