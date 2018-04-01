@@ -164,7 +164,7 @@
     <ClInclude Include="Source\Execution\Instruction.h" />
     <ClInclude Include="Source\Execution\State.h" />
     <ClInclude Include="Source\Processing\InputParser.h" />
-    <ClInclude Include="Source\Processing\ExecutionBuilder.h" />
+    <ClInclude Include="Source\Processing\ComputationBuilder.h" />
     <ClInclude Include="Source\Processing\Lexer.h" />
     <ClInclude Include="Source\Processing\Parser.h" />
     <ClInclude Include="Source\Processing\ParserBase.h" />
@@ -183,7 +183,7 @@
     <ClCompile Include="Source\Execution\Computation.cpp" />
     <ClCompile Include="Source\Execution\State.cpp" />
     <ClCompile Include="Source\Processing\InputParser.cpp" />
-    <ClCompile Include="Source\Processing\ExecutionBuilder.cpp" />
+    <ClCompile Include="Source\Processing\ComputationBuilder.cpp" />
     <ClCompile Include="Source\Processing\Lexer.cpp" />
     <ClCompile Include="Source\Processing\Parser.cpp" />
     <ClCompile Include="Source\Transformation\MachineTransformer.cpp" />

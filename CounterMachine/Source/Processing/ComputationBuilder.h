@@ -45,7 +45,7 @@ namespace Processing
 
         /// Reakció regiszter inicializációs értékére.
         /**
-        * \param reg_name a regiszter neve.
+        * \param register_name a regiszter neve.
         * \param init_value a regiszter kezdeti értéke.
         */
         void ActOnInitPair(RegisterName register_name, RegisterValue init_value);
@@ -53,7 +53,7 @@ namespace Processing
         /// Reakció utasításra.
         /**
         * \param instruction_name az utasítás neve.
-        * \param init_value arguments az argumentumok.
+        * \param arguments az argumentumok.
         */
         void ActOnInstruction(const std::string& instruction_name, const std::vector<size_t>& arguments);
 

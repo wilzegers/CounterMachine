@@ -26,7 +26,7 @@ struct ComputationHolder
 
     /// A számlálógép léptetése a lépés utáni állapot kinyerésével.
     /**
-    * \param action_after_step const Execution::State& paraméterű hívható objektum.
+    * \param func const Execution::State& paraméterű hívható objektum.
     */
     template<typename Func>
     void ComputationHolder::StepProgramWith(Func func)

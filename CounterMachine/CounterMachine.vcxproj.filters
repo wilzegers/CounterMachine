@@ -78,9 +78,6 @@
     <ClInclude Include="Source\Transformation\TransformedComputation.h">
       <Filter>Transformation\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Processing\ExecutionBuilder.h">
-      <Filter>Processing\Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Processing\Lexer.h">
       <Filter>Processing\Header Files</Filter>
     </ClInclude>
@@ -97,6 +94,9 @@
       <Filter>Shared</Filter>
     </ClInclude>
     <ClInclude Include="Source\Processing\InputParser.h">
+      <Filter>Processing\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Processing\ComputationBuilder.h">
       <Filter>Processing\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -119,9 +119,6 @@
     <ClCompile Include="Source\Transformation\TransformedComputation.cpp">
       <Filter>Transformation\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Processing\ExecutionBuilder.cpp">
-      <Filter>Processing\Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Processing\Lexer.cpp">
       <Filter>Processing\Source Files</Filter>
     </ClCompile>
@@ -129,6 +126,9 @@
       <Filter>Processing\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Processing\InputParser.cpp">
+      <Filter>Processing\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Processing\ComputationBuilder.cpp">
       <Filter>Processing\Source Files</Filter>
     </ClCompile>
   </ItemGroup>
