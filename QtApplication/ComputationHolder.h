@@ -8,58 +8,58 @@
 
 #include <iostream>
 
-#define DEBUGFUN() DebugHelper __helper{__FUNCTION__}
-
-struct DebugHelper
+/// A futtatható számlálógép-objektumot tartalmazó osztály.
+struct ComputationHolder
 {
-    const char* str;
-
-    size_t& GetIndent()
-    {
-	static size_t i = 0;
-	return i;
-    }
-
-    DebugHelper(const char* str) : str{ str }
-    {
-	std::cerr << std::string(GetIndent() * 2, ' ') << str << "{\n";
-	++GetIndent();
-    }
-
-    ~DebugHelper()
-    {
-	--GetIndent();
-	std::cerr << std::string(GetIndent() * 2, ' ') << "}\n";
-    }
-};
-
-
-class ComputationHolder
-{
-public:
+    /// A számlálógépet inicializáló konstruktor.
+    /**
+     * \param filename a számlálógépet leíró fájl neve.
+     * \param input_str a bemeneti paraméterek szövege.
+    */
     ComputationHolder(const std::wstring& filename, const std::string& input_str);
+
+    /// A futtatható számlálógép megtekintését biztosító metódus.
+    /**
+     * \return Konstans referencia a számlálógép-objektumra.
+    */
     const Descriptors::Computation& GetComputationDescriptor();
 
+    /// A számlálógép léptetése a lépés utáni állapot kinyerésével.
+    /**
+    * \param action_after_step const Execution::State& paraméterű hívható objektum.
+    */
     template<typename Func>
     void ComputationHolder::StepProgramWith(Func func)
     {
-	DEBUGFUN();
-	comp.StepWith(func);
+        comp.StepWith(func);
     }
 
+    /// A tartalmazott számlálógép futtatása a végállapot kinyerésével.
+    /**
+    * \param func const Execution::State& paraméterű hívható objektum.
+    */
     template<typename Func>
     void ComputationHolder::RunProgramWith(Func func)
     {
-	DEBUGFUN();
-	comp.RunWith(func);
+        comp.RunWith(func);
     }
 
 private:
-    Descriptors::Computation CreateDescriptor(const std::wstring& filename);
-    RegisterValueMap ParseInputs(const std::string& input_str);
+    /// A számlálógép-leíró felépítését végző függvény.
+    /**
+     * \param filename a számlálógépet leíró fájl neve.
+     * \return A felépített számlálógép-leíró.
+     */
+    static Descriptors::Computation CreateDescriptor(const std::wstring& filename);
+    /// A bemeneti regiszterek értékeinek kinyerését végző függvény.
+    /**
+     * \param input_str a bemeneti paraméterek szövege.
+     * \return a beolvasott regisztercím -> regiszterérték hozzárendelés.
+     */
+    static RegisterValueMap ParseInputs(const std::string& input_str);
 
-    Descriptors::Computation comp_descriptor;
-    Execution::Computation comp;
+    Descriptors::Computation comp_descriptor; ///< A számlálógép-leíró objektum.
+    Execution::Computation comp; ///< A futtatható számlálógép-objektum.
 };
 
 #endif // MACHINELOGIC_H

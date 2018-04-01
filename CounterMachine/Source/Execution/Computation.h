@@ -40,7 +40,7 @@ namespace Execution
 
         /// A számlálógép futtatása a végállapot kinyerésével.
         /**
-        * \tparam Functor egy const Execution::State& paraméterű hívható objektum típusa.
+        * \tparam Functor egy const Execution::State& paraméterrel hívható típus.
         * \param action_after_run const Execution::State& paraméterű hívható objektum.
         */
         template<class Functor>
@@ -68,7 +68,7 @@ namespace Execution
 
         /// A számlálógép léptetése a lépés utáni állapot kinyerésével.
         /**
-        * \tparam Functor egy const Execution::State& paraméterű hívható objektum típusa.
+        * \tparam Functor egy const Execution::State& paraméterrel hívható típus.
         * \param action_after_step const Execution::State& paraméterű hívható objektum.
         */
         template<class Functor>
