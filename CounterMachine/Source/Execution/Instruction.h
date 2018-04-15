@@ -20,6 +20,9 @@ namespace Execution
             ToNextInstruction(state);
         }
 
+        /// Polimorfizmushoz szükséges virtuális destruktor.
+        virtual ~Instruction() = default;
+
         /// Az utasítás kihatása a regiszterek állapotára.
         /**
         * Alapértelmezett viselkedésben nem csinál semmit.
@@ -37,7 +40,7 @@ namespace Execution
     };
 
     /// A végrehajtható Increase utasítás.
-    struct Increase : public Instruction
+    struct Increase final : public Instruction
     {
         RegisterName register_name; ///< a növelendő regiszter címe.
 
@@ -56,7 +59,7 @@ namespace Execution
     };
 
     /// A végrehajtható Decrease utasítás.
-    struct Decrease : public Instruction
+    struct Decrease final : public Instruction
     {
         RegisterName register_name; ///< a csökkentendő regiszter címe.
 
@@ -75,7 +78,7 @@ namespace Execution
     };
 
     /// A végrehajtható Clear utasítás.
-    struct Clear : public Instruction
+    struct Clear final : public Instruction
     {
         RegisterName register_name; ///< a kinullázandó regiszter címe.
 
@@ -94,7 +97,7 @@ namespace Execution
     };
 
     /// A végrehajtható Copy utasítás.
-    struct Copy : public Instruction
+    struct Copy final : public Instruction
     {
         RegisterName from_register; ///< a forrás regiszter címe.
         RegisterName to_register;   ///< a cél regiszter címe.
@@ -115,7 +118,7 @@ namespace Execution
     };
 
     /// A végrehajtható Jump If Zero utasítás.
-    struct JumpIfZero : public Instruction
+    struct JumpIfZero final : public Instruction
     {
         RegisterName register_name; ///< a feltétel-regiszter címe.
         size_t jump_destination;    ///< az ugrás célja.
@@ -143,7 +146,7 @@ namespace Execution
     };
 
     /// A végrehajtható Jump If Equal utasítás.
-    struct JumpIfEqual : public Instruction
+    struct JumpIfEqual final : public Instruction
     {
         RegisterName register_a; ///< az egyik összehasonlítandó regiszter címe.
         RegisterName register_b; ///< a másik összehasonlítandó regiszter címe.
@@ -174,7 +177,7 @@ namespace Execution
     };
 
     /// A végrehajtható Halt utasítás.
-    struct Halt : public Instruction
+    struct Halt final : public Instruction
     {
         virtual void ToNextInstruction(State& state) override
         {

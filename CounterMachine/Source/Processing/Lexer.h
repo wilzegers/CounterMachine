@@ -86,7 +86,7 @@ namespace Processing
         * \return az így beolvasott szöveg.
         */
         template<class Pred>
-        std::string Lexer::GetWhile(Pred predicate)
+        std::string GetWhile(Pred predicate)
         {
             std::stringstream ss;
             while (predicate(stream->peek()))

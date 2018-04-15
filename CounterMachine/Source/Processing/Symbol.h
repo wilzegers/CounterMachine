@@ -77,11 +77,11 @@ namespace Processing
 public: \
     static constexpr SymbolType type_enum = SymbolType::Type; \
     static constexpr const char* description = Description; \
-    SymbolType GetType() const override \
+    SymbolType GetType() const override final \
     { \
         return SymbolType::Type; \
     } \
-    const char* GetTypeDescription() const override \
+    const char* GetTypeDescription() const override final \
     { \
         return Description; \
     } \
@@ -89,7 +89,7 @@ public: \
     { \
         return information; \
     } \
-    std::string GetInfoString() const \
+    std::string GetInfoString() const override final \
     { \
         std::stringstream ss; \
         ss << GetInformation(); \

@@ -7,9 +7,9 @@ namespace Descriptors
         const RegisterValueMap& register_inits,
         RegisterName result_reg,
         size_t register_count)
-        : input_regs{ input_regs },
+        : instructions{ CloneContainer(instructions) },
+        input_regs{ input_regs },
         register_inits{ register_inits },
-        instructions{ CloneContainer(instructions) },
         result_reg{ result_reg },
         register_count{ register_count }
     {

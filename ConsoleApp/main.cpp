@@ -5,7 +5,8 @@
 
 int main(int argc, char* argv[])
 {
-    try {
+    try
+    {
         Processing::InputParser ip(argc, argv);
         ip.Parse();
 

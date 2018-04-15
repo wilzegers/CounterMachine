@@ -141,9 +141,9 @@ namespace Transformation
         Descriptors::InstructionVector instructions; ///< A számlálógép utasítássorozat-leírója.
         std::vector<RegisterName> free_helper_registers; ///< A jelenleg szabad segédregiszterek.
         size_t register_count; ///< Az összes regiszter száma.
-        bool has_zero_register; ///< Igaz, ha a számlálógépnek már van dedikált nullregisztere.
+        bool has_zero_register{ false }; ///< Igaz, ha a számlálógépnek már van dedikált nullregisztere.
         RegisterName zero_register_name; ///< A nullregiszter címe.
-        std::vector<size_t> new_line_locations{ { 0 } }; ///< A vector i. eleme az i-re mutató ugrások új célpontja lesz.
+        std::vector<size_t> new_line_locations{ 0 }; ///< A vector i. eleme az i-re mutató ugrások új célpontja lesz.
         std::vector<size_t> jumps_to_update; ///< A frissítendő ugrások sorszáma.
         size_t currently_added_lines{ 0 }; ///< A jelenlegi utasítás helyett hozzáadott utasítás-szám.
         RegisterName result_reg; ///< A végeredményt tartalmazó regiszter címe.

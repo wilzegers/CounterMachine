@@ -1,6 +1,4 @@
-﻿#pragma once
-
-#include <array>
+﻿#include <array>
 
 #include "Descriptors/Computation.h"
 

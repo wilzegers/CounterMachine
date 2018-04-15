@@ -12,7 +12,7 @@
 template <typename IterT>
 IterT Forward(IterT iter, size_t n)
 {
-    return std::next(iter, static_cast<IterT::difference_type>(n));
+    return std::next(iter, static_cast<typename IterT::difference_type>(n));
 }
 
 /// Regiszterérték-típus

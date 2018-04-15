@@ -19,7 +19,7 @@ enum class InstructionType
 
 #define REAL_INSTRUCTION_DESCRIPTOR(Name) \
     CLONEABLE(Name, Instruction) \
-    InstructionType GetType() const override \
+    InstructionType GetType() const override final \
     { \
         return InstructionType::Name; \
     } \
@@ -110,7 +110,7 @@ namespace Descriptors
 
         REAL_INSTRUCTION_DESCRIPTOR(Increase)
 
-        std::string ToString() const override
+        std::string ToString() const override final
         {
             return Constants::Instructions::increase
                 + ("(" + std::to_string(reg_name) + ")");
@@ -136,7 +136,7 @@ namespace Descriptors
 
         REAL_INSTRUCTION_DESCRIPTOR(Decrease)
 
-        std::string ToString() const override
+        std::string ToString() const override final
         {
             return Constants::Instructions::decrease
                 + ("(" + std::to_string(reg_name) + ")");
@@ -161,7 +161,7 @@ namespace Descriptors
 
         REAL_INSTRUCTION_DESCRIPTOR(Clear)
 
-        std::string ToString() const override
+        std::string ToString() const override final
         {
             return Constants::Instructions::clear
                 + ("(" + std::to_string(reg_name) + ")");
@@ -189,7 +189,7 @@ namespace Descriptors
 
         REAL_INSTRUCTION_DESCRIPTOR(Copy)
 
-        std::string ToString() const override
+        std::string ToString() const override final
         {
             return Constants::Instructions::copy
                 + ("(" + std::to_string(from_register) + "," + std::to_string(to_register) + ")");
@@ -217,7 +217,7 @@ namespace Descriptors
 
         REAL_INSTRUCTION_DESCRIPTOR(JumpIfZero)
 
-        std::string ToString() const override
+        std::string ToString() const override final
         {
             return Constants::Instructions::jump_if_zero
                 + ("(" + std::to_string(register_name) + "," + std::to_string(jump_destination) + ")");
@@ -248,7 +248,7 @@ namespace Descriptors
 
         REAL_INSTRUCTION_DESCRIPTOR(JumpIfEqual)
 
-        std::string ToString() const override
+        std::string ToString() const override final
         {
             return Constants::Instructions::jump_if_equal
                 + ("(" + std::to_string(register_a) + "," + std::to_string(register_b) + "," + std::to_string(jump_destination) + ")");
@@ -262,7 +262,7 @@ namespace Descriptors
 
         REAL_INSTRUCTION_DESCRIPTOR(Halt)
 
-        std::string ToString() const override
+        std::string ToString() const override final
         {
             return Constants::Instructions::halt + std::string{ "()" };
         }

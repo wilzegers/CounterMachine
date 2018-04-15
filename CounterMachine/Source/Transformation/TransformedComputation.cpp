@@ -1,5 +1,3 @@
-#pragma once
-
 #include <algorithm>
 #include <vector>
 
@@ -25,8 +23,8 @@ namespace Transformation
     }
 
     RegisterReference::RegisterReference(std::vector<RegisterName>& free_custom_registers)
-        : free_helper_registers{ free_custom_registers },
-        reg_name{ free_custom_registers.back() }
+        : reg_name{ free_custom_registers.back() },
+        free_helper_registers{ free_custom_registers }
     {
          free_custom_registers.pop_back();
     }
@@ -50,8 +48,7 @@ namespace Transformation
     TransformedComputation::TransformedComputation(const Descriptors::Computation& descriptor)
         : instructions{ CloneContainer(descriptor.instructions) },
         register_count{ descriptor.register_count },
-        result_reg{ descriptor.result_reg },
-        has_zero_register{ false }
+        result_reg{ descriptor.result_reg }
     {
     }
 
