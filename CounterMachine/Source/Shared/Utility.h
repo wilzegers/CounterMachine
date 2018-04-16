@@ -16,7 +16,7 @@ IterT Forward(IterT iter, size_t n)
 }
 
 /// Regiszterérték-típus
-using RegisterValue = size_t;
+using RegisterValue = uint64_t;
 
 /// Regisztercím-típus
 using RegisterName = size_t;
@@ -26,21 +26,6 @@ using RegisterNameSet = boost::container::flat_set<RegisterName>;
 
 /// Regisztercímekhez regiszter-értékeket rendelő hozzárendelés.
 using RegisterValueMap = boost::container::flat_map<RegisterName, RegisterValue>;
-
-/// Belső hibát jelző kivétel
-struct InternalError : public std::exception
-{
-    /// Konstruktor a hibaüzenet szövegével
-    /**
-    * \param message a hiba leírása.
-    */
-    InternalError(const std::string message) : message{ "Internal Error: " + message }
-    {
-    }
-
-private:
-    std::string message; ///< A hiba leírása.
-};
 
 /* Segédet pointerek birtoklásához. */
 

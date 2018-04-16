@@ -2,6 +2,7 @@
 
 #include "Utility.h"
 #include "Constants.h"
+#include "Exceptions.h"
 
 #include <string>
 

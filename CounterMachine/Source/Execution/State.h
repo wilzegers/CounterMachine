@@ -6,6 +6,7 @@
 
 #include "Constants.h"
 #include "Utility.h"
+#include "Exceptions.h"
 
 namespace Execution
 {
@@ -44,14 +45,14 @@ namespace Execution
         * \param name a regiszter címe
         * \return a regiszter értékének a referenciája
         */
-        RegisterValue& GetRegisterValue(RegisterName name) { return registers[name]; }
+        RegisterValue& GetRegisterValue(RegisterName name);
 
         /// Regiszterérték lekérése
         /**
         * \param name a regiszter címe
         * \return a regiszter értéke
         */
-        RegisterValue GetRegisterValue(RegisterName name) const { return registers[name]; }
+        RegisterValue GetRegisterValue(RegisterName name) const;
 
         /// A regiszterértékek vektorának lekérdezése
         /**

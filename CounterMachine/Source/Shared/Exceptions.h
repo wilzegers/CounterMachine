@@ -2,7 +2,23 @@
 
 #include "BoostIncludes.h"
 #include "Constants.h"
-#include "Utility.h"
+#include "Exceptions.h"
+
+/// Belső hibát jelző kivétel
+struct InternalError : public std::exception
+{
+    /// Konstruktor a hibaüzenet szövegével
+    /**
+    * \param message a hiba leírása.
+    */
+    InternalError(const std::string message) : message{ "Internal Error: " + message }
+    {
+    }
+
+private:
+    std::string message; ///< A hiba leírása.
+};
+
 
 /// A hibaüzenetért felelős szövegsort jelképező osztály.
 struct LocationInfo

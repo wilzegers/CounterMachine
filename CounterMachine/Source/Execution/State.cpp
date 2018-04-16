@@ -10,4 +10,22 @@ namespace Execution
     {
     }
 
+    RegisterValue& State::GetRegisterValue(RegisterName name)
+    {
+        if (name >= registers.size())
+        {
+            throw ExceptionNoLocation(Constants::ErrorMessages::nonexistant_register, name);
+        }
+        return registers[name];
+    }
+
+    RegisterValue State::GetRegisterValue(RegisterName name) const
+    {
+        if (name >= registers.size())
+        {
+            throw ExceptionNoLocation(Constants::ErrorMessages::nonexistant_register, name);
+        }
+        return registers[name];
+    }
+
 }
