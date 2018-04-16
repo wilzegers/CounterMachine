@@ -16,8 +16,8 @@ MainWindow::MainWindow(QWidget *parent) :
         this, SLOT(InstructionTable_CurrentItemChanged(QTableWidgetItem*,QTableWidgetItem*)));
 
     connect(&model, SIGNAL(SimulationEnded()), this, SLOT(EndSimulation()));
-    connect(&model, SIGNAL(ProgramLoaded(std::vector<std::string>,RegisterValueMap, size_t)),
-        this, SLOT(SimulationLoaded(std::vector<std::string>,RegisterValueMap, size_t)));
+    connect(&model, SIGNAL(ProgramLoaded(std::vector<std::string>,RegisterValueMap, size_t, size_t)),
+        this, SLOT(SimulationLoaded(std::vector<std::string>,RegisterValueMap, size_t, size_t)));
     connect(&model, SIGNAL(StateChanged(size_t,std::vector<RegisterValue>)),
         this, SLOT(ChangeSimulationState(size_t,std::vector<RegisterValue>)));
 
@@ -27,11 +27,13 @@ MainWindow::MainWindow(QWidget *parent) :
 
 void MainWindow::SimulationLoaded(const std::vector<std::string>& instructions,
                   const RegisterValueMap& reg_inits,
-                  size_t reg_count)
+                  size_t reg_count,
+                  size_t result_reg)
 {
     ui.runButton->setEnabled(true);
     ui.stepButton->setEnabled(true);
 
+    result_register = result_reg;
     instruction_strings = instructions;
     SetupInstructionTableContent();
     SetupRegisterTableContentFrom([this, &reg_inits](const size_t i)

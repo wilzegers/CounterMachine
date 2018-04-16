@@ -46,7 +46,7 @@ signals:
      */
     void ProgramLoaded(const std::vector<std::string>& instructions,
                        const RegisterValueMap& reg_inits,
-                       size_t reg_count);
+                       size_t reg_count, size_t result_register);
 
     /// Jel arról, hogy a számlálógép állapota változott.
     /**

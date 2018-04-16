@@ -24,9 +24,10 @@ public slots:
      * \param instructions az utasítások megjelenítendő szövege.
      * \param reg_inits a fix regiszterek kezdőértéke
      * \param reg_count az összes regiszterszám.
+     * \param result_reg az eredményt tartalmazó regiszter címe.
      */
     void SimulationLoaded(const std::vector<std::string>& instructions,
-                       const RegisterValueMap& reg_inits, size_t reg_count);
+                       const RegisterValueMap& reg_inits, size_t reg_count, size_t result_reg);
 
     /// A számlálógép állapot-változásakor végrehajtandó metódus.
     /// Frissíti a szimuláció megjelenítését.
@@ -109,6 +110,8 @@ private:
             ui.registerTableWidget->setItem(i / 3, (i % 3) * 2, name);
             ui.registerTableWidget->setItem(i / 3, (i % 3) * 2 + 1, value);
         }
+        ui.registerTableWidget->item(result_register / 3, (result_register % 3) * 2)
+                ->setBackground(Qt::GlobalColor::darkGray);
     }
 
     /// Hibajelentéses függvényhívás.
@@ -138,8 +141,9 @@ private:
 
     Ui::MainWindow ui;
 
-    std::vector<std::string> instruction_strings; ///< A szimullt utasítás-sorozat szövegesen.
+    std::vector<std::string> instruction_strings; ///< A szimulált utasítás-sorozat szövegesen.
     std::vector<RegisterValue> register_values; ///< A szimuláció regiszter-értékei.
+    size_t result_register;
 
     Model model; ///< A model objektum.
 };

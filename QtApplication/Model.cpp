@@ -16,7 +16,8 @@ void Model::OpenComputation(const std::wstring& filename, const std::string& inp
         [](auto& instr){return instr->ToString();}
     );
 
-    emit ProgramLoaded(instructions, comp_desc.register_inits, comp_desc.register_count);
+    emit ProgramLoaded(instructions, comp_desc.register_inits,
+                       comp_desc.register_count, comp_desc.result_reg);
 }
 
 void Model::StepProgram()
