@@ -39,7 +39,7 @@ void MainWindow::SimulationLoaded(const std::vector<std::string>& instructions,
     SetupInstructionTableContent();
     SetupRegisterTableContentFrom([this, &reg_inits](const size_t i)
     {
-        auto result = reg_inits.find(i);
+        const auto result = reg_inits.find(i);
         return result == reg_inits.end() ? Constants::Labels::input : QString::number(result->second);
     }, reg_count);
 }
@@ -76,8 +76,8 @@ void MainWindow::InstructionTable_CurrentItemChanged(QTableWidgetItem *current, 
 void MainWindow::SimulationLoadButtonClicked()
 {
 
-    auto filename{ ui.fileNameLineEdit->text().toStdWString() };
-    auto input_str{ ui.inputParamsLineEdit->text().toStdString() };
+    const auto filename{ ui.fileNameLineEdit->text().toStdWString() };
+    const auto input_str{ ui.inputParamsLineEdit->text().toStdString() };
 
     CallSafely([&](){
         model.OpenComputation(filename, input_str);
@@ -87,12 +87,12 @@ void MainWindow::SimulationLoadButtonClicked()
 void MainWindow::TransformationStartButtonClicked()
 {
 
-    auto inputFile{ ui.fileNameLineEdit_2->text().toStdWString() };
-    size_t set = ui.group1Selector->isChecked() ? 1 :
+    const auto inputFile{ ui.fileNameLineEdit_2->text().toStdWString() };
+    const size_t set = ui.group1Selector->isChecked() ? 1 :
     (ui.group2Selector->isChecked() ? 2 : 3);
     QFileDialog dialog;
     dialog.setFileMode(QFileDialog::AnyFile);
-    auto outputFile = dialog.getSaveFileName(NULL, "Create New File","","").toStdWString();
+    const auto outputFile = dialog.getSaveFileName(NULL, "Create New File","","").toStdWString();
 
     CallSafely([&](){
         model.TransformFile(inputFile, outputFile, set);
@@ -140,7 +140,7 @@ void MainWindow::SetupFileInputConnection(QLineEdit *fileNameBox, QPushButton *b
     {
         QFileDialog dialog;
         dialog.setFileMode(QFileDialog::ExistingFile);
-        auto outputFile{ dialog.getOpenFileName(NULL, "Open Program","","") };
+        const auto outputFile{ dialog.getOpenFileName(NULL, "Open Program","","") };
         fileNameBox->setText(outputFile);
     });
 }

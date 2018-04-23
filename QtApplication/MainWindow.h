@@ -93,8 +93,8 @@ private:
     {
         ui.registerTableWidget->setRowCount(std::ceil(source_size / 3.0));
         ui.registerTableWidget->setColumnCount(6);
-        auto name_width = ui.registerTableWidget->horizontalHeader()->width()/ 9;
-        auto value_width = name_width * 2;
+        const auto name_width = ui.registerTableWidget->horizontalHeader()->width()/ 9;
+        const auto value_width = name_width * 2;
 
         for (auto i = 0; i < 6; i += 2)
         {
@@ -104,9 +104,9 @@ private:
 
         for(auto i = 0; i < source_size; ++i)
         {
-            auto name = new QTableWidgetItem{ QString::number(i) };
+            const auto name = new QTableWidgetItem{ QString::number(i) };
             name->setBackground(Qt::GlobalColor::lightGray);
-            auto value = new QTableWidgetItem{ source_fun(i) };
+            const auto value = new QTableWidgetItem{ source_fun(i) };
             ui.registerTableWidget->setItem(i / 3, (i % 3) * 2, name);
             ui.registerTableWidget->setItem(i / 3, (i % 3) * 2 + 1, value);
         }
