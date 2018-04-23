@@ -43,7 +43,7 @@ namespace Constants
         static constexpr ConstStr plus_input_register       = "non-input register \'%1%\' given initial value";
         static constexpr ConstStr missing_input_register    = "input register \'%1%\' missing initial value";
         static constexpr ConstStr multiple_register_def     = "register \'%1\' defined multiple times";
-        static constexpr ConstStr input_reg_count_mismatch  = "the input register count (%1%) does not match the input value count (%2%)";
+        static constexpr ConstStr input_reg_count_mismatch  = "the input value count (%1%) does not match the input register count (%2%)";
         static constexpr ConstStr input_reg_name_mismatch   = "the input register \'%1%\' does not exist";
 
         static constexpr ConstStr nonexistant_register      = "trying to access nonexistant register no. %1%.";

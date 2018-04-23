@@ -89,20 +89,20 @@ private:
      * \param source_size a kapott regiszterértékek száma.
      */
     template<typename SourceFunT>
-    void SetupRegisterTableContentFrom(SourceFunT source_fun, size_t source_size)
+    void SetupRegisterTableContentFrom(SourceFunT source_fun, int source_size)
     {
         ui.registerTableWidget->setRowCount(std::ceil(source_size / 3.0));
         ui.registerTableWidget->setColumnCount(6);
-        size_t name_width = ui.registerTableWidget->horizontalHeader()->width()/ 9;
-        size_t value_width = name_width * 2;
+        auto name_width = ui.registerTableWidget->horizontalHeader()->width()/ 9;
+        auto value_width = name_width * 2;
 
-        for (size_t i = 0; i < 6; i += 2)
+        for (auto i = 0; i < 6; i += 2)
         {
             ui.registerTableWidget->setColumnWidth(i, name_width);
             ui.registerTableWidget->setColumnWidth(i + 1, value_width);
         }
 
-        for(size_t i = 0; i < source_size; ++i)
+        for(auto i = 0; i < source_size; ++i)
         {
             auto name = new QTableWidgetItem{ QString::number(i) };
             name->setBackground(Qt::GlobalColor::lightGray);

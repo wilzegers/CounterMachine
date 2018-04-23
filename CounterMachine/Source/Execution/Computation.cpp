@@ -62,32 +62,32 @@ namespace Execution
         {
         case InstructionType::Increase:
         {
-            auto actual_source = source->As<Descriptors::Increase>();
+            const auto actual_source = source->As<Descriptors::Increase>();
             return std::make_unique<Increase>(actual_source->reg_name);
         }
         case InstructionType::Decrease:
         {
-            auto actual_source = source->As<Descriptors::Decrease>();
+            const auto actual_source = source->As<Descriptors::Decrease>();
             return std::make_unique<Decrease>(actual_source->reg_name);
         }
         case InstructionType::Clear:
         {
-            auto actual_source = source->As<Descriptors::Clear>();
+            const auto actual_source = source->As<Descriptors::Clear>();
             return std::make_unique<Clear>(actual_source->reg_name);
         }
         case InstructionType::Copy:
         {
-            auto actual_source = source->As<Descriptors::Copy>();
+            const auto actual_source = source->As<Descriptors::Copy>();
             return std::make_unique<Copy>(actual_source->from_register, actual_source->to_register);
         }
         case InstructionType::JumpIfZero:
         {
-            auto actual_source = source->As<Descriptors::JumpIfZero>();
+            const auto actual_source = source->As<Descriptors::JumpIfZero>();
             return std::make_unique<JumpIfZero>(actual_source->register_name, actual_source->jump_destination);
         }
         case InstructionType::JumpIfEqual:
         {
-            auto actual_source = source->As<Descriptors::JumpIfEqual>();
+            const auto actual_source = source->As<Descriptors::JumpIfEqual>();
             return std::make_unique<JumpIfEqual>(actual_source->register_a, actual_source->register_b, actual_source->jump_destination);
         }
         case InstructionType::Halt:

@@ -29,17 +29,17 @@ namespace Transformation
                     InstructionType instruction_type = current_instruction->GetType();
 
                     // Ha később lehet transformálni az utasítást, akkor most nem kell.
-                    bool will_transform_later = std::any_of(Forward(service.GetSets().begin(), i),
+                    const bool will_transform_later = std::any_of(Forward(service.GetSets().begin(), i),
                         Forward(service.GetSets().begin(), desired_set), [=](auto set)
                     {
                         return set.count(instruction_type) != 0;
                     });
 
-                    // Ha a következő halmazban benne van az utasítás, akkor nem kell most átírni.
-                    bool no_need_to_transform = service.GetSets()[desired_set - 1].count(instruction_type) != 0;
+                    // Ha a célhalmazban benne van az utasítás, akkor nem kell most átírni.
+                    const bool no_need_to_transform = service.GetSets()[desired_set - 1].count(instruction_type) != 0;
 
                     // Ha az eddigiek igazak, vagy HALT az utasítás, akkor kihagyható az átírás.
-                    bool skippable = instruction_type == InstructionType::Halt
+                    const bool skippable = instruction_type == InstructionType::Halt
                         || will_transform_later || no_need_to_transform;
 
                     if (skippable)

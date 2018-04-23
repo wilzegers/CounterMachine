@@ -5,8 +5,8 @@ namespace Descriptors
     Computation::Computation(const InstructionVector& instructions,
         const RegisterNameSet& input_regs,
         const RegisterValueMap& register_inits,
-        RegisterName result_reg,
-        size_t register_count)
+        const RegisterName result_reg,
+        const size_t register_count)
         : instructions{ CloneContainer(instructions) },
         input_regs{ input_regs },
         register_inits{ register_inits },

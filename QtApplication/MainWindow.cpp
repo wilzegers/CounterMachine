@@ -23,6 +23,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     SetupFileInputConnection(ui.fileNameLineEdit, ui.browseButton);
     SetupFileInputConnection(ui.fileNameLineEdit_2, ui.browseButton_2);
+    EndSimulation();
 }
 
 void MainWindow::SimulationLoaded(const std::vector<std::string>& instructions,
@@ -39,7 +40,7 @@ void MainWindow::SimulationLoaded(const std::vector<std::string>& instructions,
     SetupRegisterTableContentFrom([this, &reg_inits](const size_t i)
     {
         auto result = reg_inits.find(i);
-        return result == reg_inits.end() ? "?" : QString::number(result->second);
+        return result == reg_inits.end() ? Constants::Labels::input : QString::number(result->second);
     }, reg_count);
 }
 
@@ -75,8 +76,8 @@ void MainWindow::InstructionTable_CurrentItemChanged(QTableWidgetItem *current, 
 void MainWindow::SimulationLoadButtonClicked()
 {
 
-    std::wstring filename{ ui.fileNameLineEdit->text().toStdWString() };
-    std::string input_str{ ui.inputParamsLineEdit->text().toStdString() };
+    auto filename{ ui.fileNameLineEdit->text().toStdWString() };
+    auto input_str{ ui.inputParamsLineEdit->text().toStdString() };
 
     CallSafely([&](){
         model.OpenComputation(filename, input_str);
@@ -86,12 +87,12 @@ void MainWindow::SimulationLoadButtonClicked()
 void MainWindow::TransformationStartButtonClicked()
 {
 
-    std::wstring inputFile{ ui.fileNameLineEdit_2->text().toStdWString() };
+    auto inputFile{ ui.fileNameLineEdit_2->text().toStdWString() };
     size_t set = ui.group1Selector->isChecked() ? 1 :
     (ui.group2Selector->isChecked() ? 2 : 3);
     QFileDialog dialog;
     dialog.setFileMode(QFileDialog::AnyFile);
-    std::wstring outputFile = dialog.getSaveFileName(NULL, "Create New File","","").toStdWString();
+    auto outputFile = dialog.getSaveFileName(NULL, "Create New File","","").toStdWString();
 
     CallSafely([&](){
         model.TransformFile(inputFile, outputFile, set);
@@ -139,7 +140,7 @@ void MainWindow::SetupFileInputConnection(QLineEdit *fileNameBox, QPushButton *b
     {
         QFileDialog dialog;
         dialog.setFileMode(QFileDialog::ExistingFile);
-        QString outputFile{ dialog.getOpenFileName(NULL, "Open Program","","") };
+        auto outputFile{ dialog.getOpenFileName(NULL, "Open Program","","") };
         fileNameBox->setText(outputFile);
     });
 }

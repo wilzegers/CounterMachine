@@ -21,9 +21,9 @@ namespace Transformation
 
         auto actual_instr = instr->As<Descriptors::Clear>();
 
-        size_t instruction_number = comp.GetInstructions().size();
+        const auto instruction_number = comp.GetInstructions().size();
 
-        auto zero = comp.RequestZeroRegister();
+        const auto zero = comp.RequestZeroRegister();
 
         comp.Add(new Descriptors::JumpIfZero{ actual_instr->reg_name, instruction_number + 3 });    // 0
         comp.Add(new Descriptors::Decrease{ actual_instr->reg_name });                              // 1
@@ -35,12 +35,12 @@ namespace Transformation
         RuleGuard guard{ comp };
 
         auto actual_instr = instr->As<Descriptors::Copy>();
-        auto zero = comp.RequestZeroRegister();
-        auto custom = comp.RequestHelperRegister();
+        const auto zero = comp.RequestZeroRegister();
+        const auto custom = comp.RequestHelperRegister();
 
         comp.Add(new Descriptors::Clear{ actual_instr->to_register });
 
-        size_t algo_start = comp.GetInstructions().size();
+        const auto algo_start = comp.GetInstructions().size();
 
         comp.Add(new Descriptors::JumpIfZero{ actual_instr->from_register, algo_start + 5 });       // 0
         comp.Add(new Descriptors::Decrease{ actual_instr->from_register });                         // 1
@@ -56,18 +56,18 @@ namespace Transformation
 
     void Set1_JumpIfEqual(TransformedComputation& comp, std::unique_ptr<Descriptors::Instruction>&& instr)
     {
-        RuleGuard guard{ comp };
+        const RuleGuard guard{ comp };
 
         auto actual_instr = instr->As<Descriptors::JumpIfEqual>();
 
-        auto zero = comp.RequestZeroRegister();
-        auto custom1 = comp.RequestHelperRegister();
-        auto custom2 = comp.RequestHelperRegister();
+        const auto zero = comp.RequestZeroRegister();
+        const auto custom1 = comp.RequestHelperRegister();
+        const auto custom2 = comp.RequestHelperRegister();
 
         comp.Add(new Descriptors::Copy{ actual_instr->register_a, custom1 });
         comp.Add(new Descriptors::Copy{ actual_instr->register_b, custom2 });
 
-        size_t algo_start = comp.GetInstructions().size();
+        const auto algo_start = comp.GetInstructions().size();
 
         comp.Add(new Descriptors::JumpIfZero{ custom1, algo_start + 5 });                               // 0
         comp.Add(new Descriptors::JumpIfZero{ custom2, algo_start + 6 });                               // 1
@@ -90,7 +90,7 @@ namespace Transformation
         auto custom2 = comp.RequestHelperRegister();
         auto zero = comp.RequestZeroRegister();
 
-        size_t algo_start = comp.GetInstructions().size();
+        const auto algo_start = comp.GetInstructions().size();
 
         comp.Add(new Descriptors::JumpIfEqual{ actual_instr->reg_name, custom1, algo_start + 3 });  // 0
         comp.Add(new Descriptors::Increase{ custom1 });                                             // 1
@@ -110,7 +110,7 @@ namespace Transformation
         RuleGuard guard{ comp };
 
         auto actual_instr = instr->As<Descriptors::JumpIfZero>();
-        auto zero = comp.RequestZeroRegister();
+        const auto zero = comp.RequestZeroRegister();
 
         comp.AddOuterJump(new Descriptors::JumpIfEqual{ actual_instr->register_name, zero, actual_instr->jump_destination });
     }
@@ -120,7 +120,7 @@ namespace Transformation
         RuleGuard guard{ comp };
 
         auto actual_instr = instr->As<Descriptors::Clear>();
-        auto zero = comp.RequestZeroRegister();
+        const auto zero = comp.RequestZeroRegister();
 
         comp.Add(new Descriptors::Copy{ zero, actual_instr->reg_name });
     }
