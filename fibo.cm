@@ -1,0 +1,19 @@
+register_number: 4
+output: 1
+inits:
+  0: 0
+  1: 1
+  2: 0
+  3: input
+program:
+0. JZ(3, 10)
+1.   COPY(0, 2)
+2.   COPY(1, 0)
+3.   COPY(0, 1)
+4.   JZ(2, 8)
+5.     DEC(2)
+6.     INC(1)
+7.   JE(0, 0, 4)
+8.   DEC(3)
+9. JZ(2, 0)
+10.HALT()
