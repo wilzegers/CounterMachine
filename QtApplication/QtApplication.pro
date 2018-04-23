@@ -14,6 +14,7 @@ CONFIG(debug, debug|release) {
 
 CONFIG(release, debug|release) {
     LIBS += -L../CounterMachine/Release -lCounterMachine
+    QMAKE_CXXFLAGS += -O2
 }
 
 INCLUDEPATH += "C:/boost/boost_1_61_0"
