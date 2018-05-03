@@ -88,19 +88,18 @@ namespace Transformation
 
         auto custom1 = comp.RequestHelperRegister();
         auto custom2 = comp.RequestHelperRegister();
-        auto zero = comp.RequestZeroRegister();
 
         const auto algo_start = comp.GetInstructions().size();
 
         comp.Add(new Descriptors::JumpIfEqual{ actual_instr->reg_name, custom1, algo_start + 3 });  // 0
         comp.Add(new Descriptors::Increase{ custom1 });                                             // 1
-        comp.Add(new Descriptors::JumpIfEqual{ zero, zero, algo_start });                           // 2
+        comp.Add(new Descriptors::JumpIfEqual{ custom1, custom1, algo_start });                           // 2
         comp.Add(new Descriptors::Clear{ actual_instr->reg_name });                                 // 3
         comp.Add(new Descriptors::Increase{ custom2 });                                             // 4
         comp.Add(new Descriptors::JumpIfEqual{ custom1, custom2, algo_start + 9 });                 // 5
         comp.Add(new Descriptors::Increase{ custom2 });                                             // 6
         comp.Add(new Descriptors::Increase{ actual_instr->reg_name });                              // 7
-        comp.Add(new Descriptors::JumpIfEqual{ zero, zero, algo_start + 5 });                       // 8
+        comp.Add(new Descriptors::JumpIfEqual{ custom1, custom1, algo_start + 5 });                       // 8
         comp.Add(new Descriptors::Clear{ custom1 });                                                // 9
         comp.Add(new Descriptors::Clear{ custom2 });                                                //10
     }

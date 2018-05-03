@@ -16,24 +16,45 @@
     <Filter Include="Source Files\Tests">
       <UniqueIdentifier>{fbf4ec97-a2e3-4a93-abc8-71795f8ffdfd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Tests\Transformation">
+      <UniqueIdentifier>{eb40a692-9f3f-45c8-afbc-e719ab83beb4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Tests\Processing">
+      <UniqueIdentifier>{f0da3f55-85dc-4293-80b3-9c79cd4545e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Tests\Execution">
+      <UniqueIdentifier>{ae461276-ad2c-4826-bc75-359bb6df9d1c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="TestUtils.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="TestUtils.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Set1Test.cpp">
-      <Filter>Source Files\Tests</Filter>
+      <Filter>Source Files\Tests\Transformation</Filter>
     </ClCompile>
     <ClCompile Include="Set2Test.cpp">
-      <Filter>Source Files\Tests</Filter>
+      <Filter>Source Files\Tests\Transformation</Filter>
     </ClCompile>
     <ClCompile Include="Set3Test.cpp">
-      <Filter>Source Files\Tests</Filter>
+      <Filter>Source Files\Tests\Transformation</Filter>
     </ClCompile>
+    <ClCompile Include="TransformationTestUtils.cpp">
+      <Filter>Source Files\Tests\Transformation</Filter>
+    </ClCompile>
+    <ClCompile Include="LexerTest.cpp">
+      <Filter>Source Files\Tests\Processing</Filter>
+    </ClCompile>
+    <ClCompile Include="ParserTest.cpp">
+      <Filter>Source Files\Tests\Processing</Filter>
+    </ClCompile>
+    <ClCompile Include="InstructionTest.cpp">
+      <Filter>Source Files\Tests\Execution</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="TransformationTestUtils.h">
+      <Filter>Source Files\Tests\Transformation</Filter>
+    </ClInclude>
+    <ClInclude Include="TestUtils.h">
+      <Filter>Source Files\Tests</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

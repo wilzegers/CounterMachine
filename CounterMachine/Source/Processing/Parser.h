@@ -25,6 +25,13 @@ namespace Processing
         */
         Parser(const std::wstring filename);
 
+
+        /// Szövegfolyam készült konstruktor.
+        /**
+        * \param stream a feldolgozandó szövegfolyam.
+        */
+        Parser(std::unique_ptr<std::istream>&& stream);
+
         /// Parser futtatása.
         void Parse();
 

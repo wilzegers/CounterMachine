@@ -1,27 +1,4 @@
-#include "TestUtils.h"
-
-Descriptors::Computation MakeTrivialComputation(std::unique_ptr<Descriptors::Instruction>&& instr,
-    const std::vector<RegisterName>& registers_necessary)
-{
-    RegisterValueMap registers;
-    for (auto reg : registers_necessary)
-    {
-        registers.emplace(reg, std::hash<RegisterValue>()(reg) % 19 + 2);
-    }
-    Descriptors::InstructionVector vec;
-
-    vec.push_back(instr->Clone());
-    vec.push_back(std::move(instr));
-    vec.push_back(std::make_unique<Descriptors::Halt>());
-
-    return Descriptors::Computation{
-        std::move(vec),
-        RegisterNameSet{},
-        registers,
-        registers_necessary.front(),
-        registers_necessary.size()
-    };
-}
+#include "TransformationTestUtils.h"
 
 void TestClear(size_t set)
 {

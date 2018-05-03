@@ -3,6 +3,8 @@
 #include <type_traits>
 #include <memory>
 
+#include "BoostIncludes.h"
+
 /// Iterátor elé lépés.
 /**
 * \param iter a megelőzendő iterátor.

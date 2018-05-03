@@ -29,6 +29,17 @@ namespace Processing
         {
             return LocationInfo{ name, lexer.GetLineNumber() };
         }
+
+        /// A jelenlegi szimbólum típusának ellenőrzése.
+        /**
+        * \tparam ExactSymbol az elvárt típus.
+        */
+        template<class ExactSymbol>
+        bool CurrentSymbolIs() const
+        {
+            return !lexer.IsEndOfFile() && lexer.GetCurrentSymbol()->IsA<ExactSymbol>();
+        }
+
         /// A jelenlegi szimbólum típusának ellenőrzése.
         /**
         * \tparam ExactSymbol az elvárt típus.
@@ -36,13 +47,18 @@ namespace Processing
         template<class ExactSymbol>
         void CurrentSymbolShouldBe() const
         {
-            if (lexer.GetCurrentSymbol() == nullptr)
-            {
-                ThrowWithLocation(Constants::ErrorMessages::unexpected_eof);
-            }
-            if (!lexer.GetCurrentSymbol()->IsA<ExactSymbol>())
+            ShouldNotBeEOF();
+            if (!CurrentSymbolIs<ExactSymbol>())
             {
                 RaiseNotOfType<ExactSymbol>();
+            }
+        }
+
+        void ShouldNotBeEOF() const
+        {
+            if (lexer.IsEndOfFile())
+            {
+                ThrowWithLocation(Constants::ErrorMessages::unexpected_eof);
             }
         }
 

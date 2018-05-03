@@ -6,8 +6,14 @@ namespace Processing
 {
 
     Parser::Parser(const std::wstring filename) :
-        ParserBase{ SafelyOpenFile(filename), Constants::Locations::program }
+        Parser{ SafelyOpenFile(filename) }
     {
+    }
+
+    Parser::Parser(std::unique_ptr<std::istream>&& stream) :
+        ParserBase{ std::move(stream), Constants::Locations::program }
+    {
+
     }
 
 
@@ -82,7 +88,7 @@ namespace Processing
 
     void Parser::ParseRegInit()
     {
-        while (lexer.GetCurrentSymbol()->IsA<Symbols::Number>())
+        while (CurrentSymbolIs<Symbols::Number>())
         {
             const auto reg_symbol = lexer.GetCurrentSymbol();
             size_t reg_name = reg_symbol->As<Symbols::Number>()->GetInformation();
@@ -136,7 +142,7 @@ namespace Processing
 
         while (!lexer.IsEndOfFile())
         {
-            if (lexer.GetCurrentSymbol()->IsA<Symbols::Number>())
+            if (CurrentSymbolIs<Symbols::Number>())
             {
                 lexer.ReadNextSymbol();
 
@@ -168,7 +174,7 @@ namespace Processing
 
         bool parenthesis_open = true;
 
-        if (lexer.GetCurrentSymbol()->IsA<Symbols::CloseParentheses>())
+        if (CurrentSymbolIs<Symbols::CloseParentheses>())
         {
             parenthesis_open = false;
             lexer.ReadNextSymbol();
@@ -180,11 +186,13 @@ namespace Processing
             result.push_back(parameter);
             lexer.ReadNextSymbol();
 
-            if (lexer.GetCurrentSymbol()->IsA<Symbols::Comma>())
+            ShouldNotBeEOF();
+
+            if (CurrentSymbolIs<Symbols::Comma>())
             {
                 lexer.ReadNextSymbol();
             }
-            else if (lexer.GetCurrentSymbol()->IsA<Symbols::CloseParentheses>())
+            else if (CurrentSymbolIs<Symbols::CloseParentheses>())
             {
                 parenthesis_open = false;
                 lexer.ReadNextSymbol();

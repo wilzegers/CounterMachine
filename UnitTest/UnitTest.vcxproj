@@ -150,10 +150,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="InstructionTest.cpp" />
+    <ClCompile Include="LexerTest.cpp" />
+    <ClCompile Include="ParserTest.cpp" />
     <ClCompile Include="Set1Test.cpp" />
     <ClCompile Include="Set2Test.cpp" />
     <ClCompile Include="Set3Test.cpp" />
-    <ClCompile Include="TestUtils.cpp" />
+    <ClCompile Include="TransformationTestUtils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CounterMachine\CounterMachine.vcxproj">
@@ -162,6 +165,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TestUtils.h" />
+    <ClInclude Include="TransformationTestUtils.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -73,11 +73,6 @@ namespace Execution
 
         virtual void ChangeRegisters(State& state) override
         {
-            auto& reg_ref = state.GetRegisterValue(register_name);
-            if (reg_ref == 0)
-            {
-                throw ExceptionNoLocation(Constants::ErrorMessages::decrease_zero, register_name);
-            }
             --state.GetRegisterValue(register_name);
         }
     };

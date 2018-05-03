@@ -122,13 +122,13 @@
     <ClCompile Include="Source\Processing\Lexer.cpp">
       <Filter>Processing\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Processing\Parser.cpp">
-      <Filter>Processing\Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Processing\InputParser.cpp">
       <Filter>Processing\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Processing\ComputationBuilder.cpp">
+      <Filter>Processing\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Processing\Parser.cpp">
       <Filter>Processing\Source Files</Filter>
     </ClCompile>
   </ItemGroup>
