@@ -44,7 +44,7 @@ namespace Execution
         * \param action_after_run const Execution::State& paraméterű hívható objektum.
         */
         template<class Functor>
-        void RunWith(Functor action_after_run)
+        auto RunWith(Functor action_after_run) -> decltype((void)(action_after_run(std::as_const(state))))
         {
             while (!state.IsDone())
             {
@@ -93,7 +93,7 @@ namespace Execution
 
         /// A számlálógép futási állapotának lekérdezése.
         /**
-        * \return Igaz, ha vége a futásnak.
+        * \return igaz, ha vége a futásnak.
         */
         bool IsDone() const
         {

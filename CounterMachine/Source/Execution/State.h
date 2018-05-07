@@ -21,7 +21,7 @@ namespace Execution
 
         /// A futtatás állapotának lekérdezése.
         /**
-        * \return Igaz, ha a futtatás befejeződött.
+        * \return igaz, ha a futtatás befejeződött.
         */
         bool IsDone() const { return done; }
 
@@ -30,13 +30,13 @@ namespace Execution
 
         /// A következő utasítás sorszámának a lekérése.
         /**
-        * \return A következő utasítás sorszáma.
+        * \return a következő utasítás sorszáma.
         */
         size_t GetNextInstruction() const { return next_instruction; }
 
         /// A következő utasítás sorszámának a lekérése.
         /**
-        * \return A következő utasítás sorszámának a referenciája.
+        * \return a következő utasítás sorszámának a referenciája.
         */
         size_t& GetNextInstruction() { return next_instruction; }
 

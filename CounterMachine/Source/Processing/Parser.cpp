@@ -41,23 +41,28 @@ namespace Processing
         while (!expected_labels.empty() && !lexer.IsEndOfFile())
         {
             std::string label = SafelyGetSymbolAs<Symbols::Label>()->GetInformation();
-            lexer.ReadNextSymbol();
-
-            CurrentSymbolShouldBe<Symbols::Colon>();
-            lexer.ReadNextSymbol();
 
             if (expected_labels.find(label) != expected_labels.end())
             {
                 if (label == Constants::Labels::output_reg)
                 {
+                    lexer.ReadNextSymbol();
+                    CurrentSymbolShouldBe<Symbols::Colon>();
+                    lexer.ReadNextSymbol();
                     ParseOutputReg();
                 }
                 else if (label == Constants::Labels::reg_init)
                 {
+                    lexer.ReadNextSymbol();
+                    CurrentSymbolShouldBe<Symbols::Colon>();
+                    lexer.ReadNextSymbol();
                     ParseRegInit();
                 }
                 else if (label == Constants::Labels::reg_number)
                 {
+                    lexer.ReadNextSymbol();
+                    CurrentSymbolShouldBe<Symbols::Colon>();
+                    lexer.ReadNextSymbol();
                     ParseRegNumber();
                 }
                 expected_labels.erase(label);

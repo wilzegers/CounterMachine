@@ -28,26 +28,26 @@ namespace Processing
 
         /// A szimbólum típusát lekérő függvény
         /**
-        * \return A szimbólum típusa.
+        * \return a szimbólum típusa.
         */
         virtual SymbolType GetType() const = 0;
 
         /// A szimbólumtípus leírását lekérő függvény
         /** 
-        * \return A szimbólumtípus leírása.
+        * \return a szimbólumtípus leírása.
         */
         virtual const char* GetTypeDescription() const = 0;
 
         /// A szimbólumban lévő információ lekérése stringként.
         /**
-        * \return A szimbólum információja string formában.
+        * \return a szimbólum információja string formában.
         */
         virtual std::string GetInfoString() const = 0;
 
         /// A függvénnyel lekérhető, hogy az adott típusú-e a szimbólum.
         /**
         * \tparam ExactSymbol a típus, amivel az egyezés kérdéses
-        * \return Igaz, ha a kérdezett típusú az szimbólum.
+        * \return igaz, ha a kérdezett típusú az szimbólum.
         */
         template<class ExactSymbol>
         bool IsA() const
@@ -58,7 +58,7 @@ namespace Processing
         /// Ellenőrzötten az adott típussá castolja a konstans szimbólumot.
         /** Ha nem ExactSymbol típusú az objektum, akkor belső hibajelzés történik.
         *  \tparam ExactSymbol a cast céltípus.
-        *  \return Megfelelő típusú pointer.
+        *  \return megfelelő típusú pointer.
         */
         template<class ExactSymbol>
         ViewPtr<const ExactSymbol> As() const

@@ -127,5 +127,37 @@ namespace  UnitTest
                 "ALMAFA(987, , 321)",
             &Processing::Parser::ParseInstruction);
         }
+
+        TEST_METHOD(Parser_ParsingWritingAreInverses)
+        {
+            const auto program_code =
+                "register_number:2\n"
+                "output:1\n"
+                "inits:\n"
+                "0:1\n"
+                "1:0\n"
+                "program:\n"
+                "0.INC(0)\n"
+                "1.DEC(0)\n"
+                "2.CLR(0)\n"
+                "3.JZ(0,4)\n"
+                "4.JE(0,0,5)\n"
+                "5.COPY(1,0)\n"
+                "HALT()\n";
+            auto stream = std::make_unique<std::stringstream>(program_code);
+            Processing::Parser p{ std::move(stream) };
+            p.Parse();
+            std::stringstream ss;
+
+            ss << p.GetResultComputation();
+            auto original = ss.str();
+
+            Processing::Parser p2{ std::make_unique<std::stringstream>(ss.str()) };
+            p2.Parse();
+            ss = std::stringstream{};
+            ss << p2.GetResultComputation();
+
+            Assert::IsTrue(ss.str() == original);
+        }
     };
 }

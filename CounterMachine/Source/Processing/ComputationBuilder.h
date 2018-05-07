@@ -21,7 +21,7 @@ namespace Processing
 
         /// A számlálógép-leíró készítése.
         /**
-        * \return A számlálógép-leíró.
+        * \return a számlálógép-leíró.
         */
         Descriptors::Computation CreateComputation();
 
@@ -69,7 +69,7 @@ namespace Processing
         /**
         * \tparam Instruction az utasítás-leíró típusa.
         * \param instruction_name az utasítás neve.
-        * \param init_value arguments az argumentumok.
+        * \param arguments az argumentumok.
         */
         template<class Instruction>
         void CreateInstruction(const std::string& instruction_name, const std::vector<size_t>& arguments)

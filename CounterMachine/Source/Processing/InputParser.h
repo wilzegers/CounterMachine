@@ -28,7 +28,7 @@ namespace Processing
 
         /// A parseolt regiszterértékek kinyerése.
         /**
-        * \return Az inputregiszterek inicializási értékei.
+        * \return az inputregiszterek inicializási értékei.
         */
         RegisterValueMap GetInits() { return inits; }
 

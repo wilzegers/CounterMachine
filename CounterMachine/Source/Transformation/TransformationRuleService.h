@@ -9,42 +9,42 @@
 
 namespace Transformation
 {
-    // Az átírási szabályokat tartalmazó osztály.
+    // Az Ã¡tÃ­rÃ¡si szabÃ¡lyokat tartalmazÃ³ osztÃ¡ly.
     struct TransformationRuleService
     {
-        /// Utasításhalmaz típus.
+        /// UtasÃ­tÃ¡shalmaz tÃ­pus.
         using InstructionSet = boost::container::flat_set<InstructionType>;
-        /// Utasításhalmaz-tömb típus.
+        /// UtasÃ­tÃ¡shalmaz-tÃ¶mb tÃ­pus.
         using InstructionSets = std::array<InstructionSet, 3>;
         
-        /// Átírási szabály típus.
+        /// ÃtÃ­rÃ¡si szabÃ¡ly tÃ­pus.
         using Transformation = std::function<void(TransformedComputation& comp, std::unique_ptr<Descriptors::Instruction>&& instr)>;
         
-        /// Átírási szabályokat tartalmazó tömb típus.
+        /// ÃtÃ­rÃ¡si szabÃ¡lyokat tartalmazÃ³ tÃ¶mb tÃ­pus.
         using Transformations = std::array<boost::container::flat_map<InstructionType, Transformation>, 3>;
 
-        /// Utasításhalmazok lekérése.
+        /// UtasÃ­tÃ¡shalmazok lekÃ©rÃ©se.
         /**
-        * \return az utasításhalmazokat tartalmazó tömb.
+        * \return az utasÃ­tÃ¡shalmazokat tartalmazÃ³ tÃ¶mb.
         */
         const InstructionSets& GetSets() const
         {
             return sets;
         }
 
-        /// A kihagyási szabály lekérése.
+        /// A kihagyÃ¡si szabÃ¡ly lekÃ©rÃ©se.
         /**
-        * \return a hívható kihagyási szabály.
+        * \return a hÃ­vhatÃ³ kihagyÃ¡si szabÃ¡ly.
         */
         const Transformation GetSkip() const
         {
             return Skip;
         }
 
-        /// Átírási szabály lekérése.
+        /// ÃtÃ­rÃ¡si szabÃ¡ly lekÃ©rÃ©se.
         /**
-        * \param set_number az átírás célhalmaza.
-        * \param type az átírandó szabály típusa.
+        * \param set_number az Ã¡tÃ­rÃ¡s cÃ©lhalmaza.
+        * \param type az Ã¡tÃ­randÃ³ szabÃ¡ly tÃ­pusa.
         */
         const Transformation GetRuleFor(size_t set_number, InstructionType type)
         {
@@ -53,7 +53,7 @@ namespace Transformation
 
     private:
 
-        /// Utasításhalmazokat tartalmazó tömb.
+        /// UtasÃ­tÃ¡shalmazokat tartalmazÃ³ tÃ¶mb.
         const InstructionSets sets
         {{
             {
@@ -73,7 +73,7 @@ namespace Transformation
             }
         }};
 
-        /// Átírási szabályokat tartalmazó tömb.
+        /// ÃtÃ­rÃ¡si szabÃ¡lyokat tartalmazÃ³ tÃ¶mb.
         const Transformations rules
         {{
             {

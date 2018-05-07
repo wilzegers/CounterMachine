@@ -38,13 +38,13 @@ namespace Descriptors
 
         /// Az utasítás típusát lekérő függvény.
         /**
-        * \return Az utasítás típusa.
+        * \return az utasítás típusa.
         */
         virtual InstructionType GetType() const = 0;
 
         /// A függvénnyel lekérhető, hogy az adott típusú-e az utasítás.
         /** \tparam ActualInstruction a típus, amivel az egyezés kérdéses
-            \return Igaz, ha a kérdezett típusú az utasítás.
+            \return igaz, ha a kérdezett típusú az utasítás.
         */
         template <class ActualInstruction>
         bool IsA() const
@@ -55,7 +55,7 @@ namespace Descriptors
         /// Ellenőrzötten az adott típussá castolja a konstans utasítást.
         /** Ha nem ActualInstruction típusú az objektum, akkor belső hibajelzés történik.
          *  \tparam ActualInstruction a cast céltípus.
-         *  \return Megfelelő típusú pointer.
+         *  \return megfelelő típusú pointer.
          */
         template <class ActualInstruction>
         ViewPtr<const ActualInstruction> const As() const
@@ -70,7 +70,7 @@ namespace Descriptors
         /// Ellenőrzötten az adott típussá castolja a nem konstans utasítást.
         /** Ha nem ActualInstruction típusú az objektum, akkor belső hibajelzés történik.
         *  \tparam ActualInstruction a cast céltípus.
-        *  \return Megfelelő típusú pointer.
+        *  \return megfelelő típusú pointer.
         */
         template <class ActualInstruction>
         ViewPtr<ActualInstruction> As()

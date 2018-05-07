@@ -23,7 +23,7 @@ namespace Processing
 
         /// Az olvasás jelenlegi helyének lekérése.
         /**
-        * \return Az olvasás jelenlegi helye.
+        * \return az olvasás jelenlegi helye.
         */
         LocationInfo GetLocationInfo() const
         {
@@ -65,7 +65,7 @@ namespace Processing
         /// A jelenlegi szimbólum bizonyos típussá castolása ellenőrzéssel.
         /**
         * \tparam ExactSymbol az elvárt típus
-        * \return Az átcastolt szimbólumra mutató pointer.
+        * \return az átcastolt szimbólumra mutató pointer.
         */
         template<class ExactSymbol>
         ViewPtr<const ExactSymbol> SafelyGetSymbolAs() const

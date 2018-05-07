@@ -37,7 +37,7 @@ namespace Processing
 
         /// A parseolt számlálógép leírójának a kinyerése.
         /**
-        * \return A parseolt számlálógép leírója.
+        * \return a parseolt számlálógép leírója.
         */
         Descriptors::Computation GetResultComputation();
 
@@ -46,13 +46,13 @@ namespace Processing
         /// A Fájl biztonságos megnyitása, ha nem létezik, megfelelő hibát dob.
         /**
         * \param filename a feldolgozandó file neve.
-        * \return A megnyitott filestream.
+        * \return a megnyitott filestream.
         */
         static std::unique_ptr<std::istream> SafelyOpenFile(const std::wstring& filename);
 
         /// Argumentumok parseolása.
         /**
-        * \return A parsolt argumentumok.
+        * \return a parsolt argumentumok.
         */
         std::vector<size_t> ParseArguments();
 

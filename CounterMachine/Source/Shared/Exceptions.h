@@ -79,7 +79,7 @@ private:
     /**
     * \param temp_string a felépítésben lévő format_string.
     * \param arg1 a jelenleg feldolgozás alatt álló argumentum.
-    * \param atgs a maradék argumentumok.
+    * \param args a maradék argumentumok.
     */
     template<class Arg1, class... Args>
     static void BuildExceptionStringImpl(boost::format& temp_string, Arg1 arg1, Args... args)

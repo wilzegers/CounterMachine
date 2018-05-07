@@ -41,8 +41,9 @@ signals:
     /// Jel arról, hogy a számlálógép betöltésre került.
     /**
      * \param instructions az utasítások megjelenítendő szövege.
-     * \param reg_inits a fix regiszterek kezdőértéke
+     * \param reg_inits a fix regiszterek kezdőértéke.
      * \param reg_count az összes regiszterszám.
+     * \param result_register az eredményt tartalmazó regisztercím.
      */
     void ProgramLoaded(const std::vector<std::string>& instructions,
                        const RegisterValueMap& reg_inits,

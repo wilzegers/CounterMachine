@@ -50,13 +50,13 @@ namespace Transformation
     {
         /// Getter az utasítás-leírók vektorához.
         /**
-        * \return Referencia az utasítás-leírók vektorára.
+        * \return referencia az utasítás-leírók vektorára.
         */
         Descriptors::InstructionVector& GetInstructions();
 
         /// Getter az utasítás-leírók konstans vektorához.
         /**
-        * \return Konstans referencia az utasítás-leírók vektorára.
+        * \return konstans referencia az utasítás-leírók vektorára.
         */
         const Descriptors::InstructionVector& GetInstructions() const;
 
@@ -77,13 +77,13 @@ namespace Transformation
 
         /// Regiszterek számának a lekérése.
         /**
-        * \return A jelenleg használt regiszterek száma.
+        * \return a jelenleg használt regiszterek száma.
         */
         size_t GetRegisterCount() const;
 
         /// Egy jelenleg nem használt segédregiszter lekérése.
         /**
-        * \return Regiszterként funkcionáló objektum, amely megsemmisüléskor újra használaton kívülinek állítja magát.
+        * \return regiszterként funkcionáló objektum, amely megsemmisüléskor újra használaton kívülinek állítja magát.
         */
         RegisterReference RequestHelperRegister();
 
