@@ -5,6 +5,12 @@
 
 #include "BoostIncludes.h"
 
+template<typename T>
+const T& AsConst(T& t)
+{
+    return t;
+}
+
 /// Iterátor elé lépés.
 /**
 * \param iter a megelőzendő iterátor.
@@ -14,7 +20,7 @@
 template <typename IterT>
 IterT Forward(IterT iter, size_t n)
 {
-    return std::next(iter, static_cast<typename IterT::difference_type>(n));
+    return std::next(iter, static_cast<int>(n));
 }
 
 /// Regiszterérték-típus

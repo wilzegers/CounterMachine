@@ -5,7 +5,7 @@
 namespace Processing
 {
 
-    Parser::Parser(const std::wstring filename) :
+    Parser::Parser(const std::string filename) :
         Parser{ SafelyOpenFile(filename) }
     {
     }
@@ -13,7 +13,6 @@ namespace Processing
     Parser::Parser(std::unique_ptr<std::istream>&& stream) :
         ParserBase{ std::move(stream), Constants::Locations::program }
     {
-
     }
 
 
@@ -210,7 +209,7 @@ namespace Processing
         return result;
     }
 
-    std::unique_ptr<std::istream> Parser::SafelyOpenFile(const std::wstring& filename)
+    std::unique_ptr<std::istream> Parser::SafelyOpenFile(const std::string& filename)
     {
         std::unique_ptr<std::ifstream> result = std::make_unique<std::ifstream>(filename);
         if (!result->is_open())

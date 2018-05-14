@@ -76,7 +76,7 @@ void MainWindow::InstructionTable_CurrentItemChanged(QTableWidgetItem *current, 
 void MainWindow::SimulationLoadButtonClicked()
 {
 
-    const auto filename{ ui.fileNameLineEdit->text().toStdWString() };
+    const auto filename{ ui.fileNameLineEdit->text() };
     const auto input_str{ ui.inputParamsLineEdit->text().toStdString() };
 
     CallSafely([&](){
@@ -87,12 +87,12 @@ void MainWindow::SimulationLoadButtonClicked()
 void MainWindow::TransformationStartButtonClicked()
 {
 
-    const auto inputFile{ ui.fileNameLineEdit_2->text().toStdWString() };
+    const auto inputFile{ ui.fileNameLineEdit_2->text() };
     const size_t set = ui.group1Selector->isChecked() ? 1 :
     (ui.group2Selector->isChecked() ? 2 : 3);
     QFileDialog dialog;
     dialog.setFileMode(QFileDialog::AnyFile);
-    const auto outputFile = dialog.getSaveFileName(NULL, "Create New File","","").toStdWString();
+    const auto outputFile = dialog.getSaveFileName(NULL, "Create New File","","");
 
     CallSafely([&](){
         model.TransformFile(inputFile, outputFile, set);

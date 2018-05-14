@@ -3,18 +3,18 @@ CONFIG   += c++14
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = QtApplication
+TARGET = CounterMachineApp
 TEMPLATE = app
 
 DEFINES += QT_DEPRECATED_WARNINGS
 
 CONFIG(debug, debug|release) {
-    LIBS += -L../CounterMachine/Debug -lCounterMachine
+    LIBS += -L../Debug -lCounterMachine
 }
 
 CONFIG(release, debug|release) {
-    LIBS += -L../CounterMachine/Release -lCounterMachine
-    QMAKE_CXXFLAGS += -O2
+    LIBS += -L../CounterMachine -lCounterMachine
+    QMAKE_CXXFLAGS += -O3
 }
 
 INCLUDEPATH += "C:/boost/boost_1_61_0"

@@ -117,7 +117,7 @@ struct ExceptionWithLocation : public std::exception
     /**
     * \return a kivétel szövege.
     */
-    const char* what() const override
+    const char* what() const throw() override
     {
         return string_builder.GetString().c_str();
     }
@@ -146,7 +146,7 @@ struct ExceptionNoLocation : public std::exception
     /**
     * \return a kivétel szövege.
     */
-    const char* what() const override
+    const char* what() const throw() override
     {
         return string_builder.GetString().c_str();
     }

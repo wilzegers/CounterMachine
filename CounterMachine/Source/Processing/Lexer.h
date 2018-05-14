@@ -32,7 +32,7 @@ namespace Processing
             /**
             * \return a kivétel szövege.
             */
-            virtual const char* what() const override { return message.c_str(); }
+            virtual const char* what() const throw() override { return message.c_str(); }
 
         private:
 
@@ -46,7 +46,7 @@ namespace Processing
         /**
         * \return nézet a jelenlegi szimbólumra.
         */
-        const ViewPtr<Symbol> GetCurrentSymbol() const { return MakeView(current); }
+        ViewPtr<const Symbol> GetCurrentSymbol() const { return MakeView(current); }
 
         /// Annak a lekérése, hogy a fájl végére értünk-e.
         /**

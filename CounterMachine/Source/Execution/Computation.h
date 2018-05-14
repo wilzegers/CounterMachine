@@ -44,7 +44,7 @@ namespace Execution
         * \param action_after_run const Execution::State& paraméterű hívható objektum.
         */
         template<class Functor>
-        auto RunWith(Functor action_after_run) -> decltype((void)(action_after_run(std::as_const(state))))
+        void RunWith(Functor action_after_run)
         {
             while (!state.IsDone())
             {
@@ -56,7 +56,7 @@ namespace Execution
                 instructions[state.GetNextInstruction()]->Execute(state);
             }
 
-            action_after_run(std::as_const(state));
+            action_after_run(AsConst(state));
             result = state.GetRegisterValue(result_reg);
         }
 
@@ -83,7 +83,7 @@ namespace Execution
                 }
                 instructions[state.GetNextInstruction()]->Execute(state);
 
-                action_after_step(std::as_const(state));
+                action_after_step(AsConst(state));
                 if (state.IsDone())
                 {
                     result = state.GetRegisterValue(result_reg);

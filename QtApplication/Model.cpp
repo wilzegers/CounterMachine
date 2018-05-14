@@ -2,12 +2,23 @@
 
 #include <algorithm>
 
+#include <QFile>
+#include <QTextStream>
+#include <QString>
+
 #include "Transformation/MachineTransformer.h"
 #include "Processing/Parser.h"
 
-void Model::OpenComputation(const std::wstring& filename, const std::string& input_str)
+template<typename T>
+QTextStream& operator<<(QTextStream& s, T&& t)
 {
+    std::stringstream ss;
+    ss << t;
+    return s << ss.str().data();
+}
 
+void Model::OpenComputation(const QString& filename, const std::string& input_str)
+{
     comp_holder.emplace(filename, input_str);
     const auto& comp_desc = comp_holder->GetComputationDescriptor();
 
@@ -47,11 +58,26 @@ void Model::RunProgram()
     emit SimulationEnded();
 }
 
-void Model::TransformFile(const std::wstring& input_file, const std::wstring& output_file, size_t to_set)
+void Model::TransformFile(const QString& input_file, const QString& output_file, size_t to_set)
 {
-    Processing::Parser p{input_file};
+    QFile input{input_file};
+    input.open(QIODevice::ReadOnly | QIODevice::Text);
+    if (!input.isOpen())
+    {
+            throw std::runtime_error("Error while opening file");
+    }
+    auto input_string = QTextStream{&input}.readAll().toStdString();
+    Processing::Parser p{ std::make_unique<std::stringstream>(input_string) };
     p.Parse();
-    std::ofstream{output_file} << Transformation::MachineTransformer{}.Transform(to_set, p.GetResultComputation());
+    QFile output(output_file);
+    input.close();
+    output.open(QIODevice::WriteOnly | QIODevice::Text);
+    if (!output.isOpen())
+    {
+            throw std::runtime_error{"Error while writing file"};
+    }
+    QTextStream stream(&output);
+    stream << Transformation::MachineTransformer{}.Transform(to_set, p.GetResultComputation());
 }
 
 void Model::Clear()

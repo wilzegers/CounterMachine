@@ -2,7 +2,7 @@
 
 #include <string>
 #include "Constants.h"
-
+#include "Exceptions.h"
 
 namespace Processing
 {

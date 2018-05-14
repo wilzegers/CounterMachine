@@ -17,7 +17,7 @@ public slots:
      * \param filename a számlálógépet leíró fájl neve.
      * \param input_str a bemeneti paraméterek szövege.
     */
-    void OpenComputation(const std::wstring& filename, const std::string& input_str);
+    void OpenComputation(const QString& filename, const std::string& input_str);
 
     /// A következő utasítás végrehajtása.
     void StepProgram();
@@ -31,7 +31,7 @@ public slots:
      * \param output_file az átalakítás eredményeként kapott fájl neve.
      * \param to_set a célhalmaz.
      */
-    void TransformFile(const std::wstring& input_file, const std::wstring& output_file, size_t to_set);
+    void TransformFile(const QString& input_file, const QString& output_file, size_t to_set);
 
     /// A model kiürítése.
     void Clear();

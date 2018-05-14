@@ -23,8 +23,7 @@ namespace Processing
         /**
         * \param filename a feldolgozandó file neve.
         */
-        Parser(const std::wstring filename);
-
+        Parser(const std::string filename);
 
         /// Szövegfolyam készült konstruktor.
         /**
@@ -48,7 +47,7 @@ namespace Processing
         * \param filename a feldolgozandó file neve.
         * \return a megnyitott filestream.
         */
-        static std::unique_ptr<std::istream> SafelyOpenFile(const std::wstring& filename);
+        static std::unique_ptr<std::istream> SafelyOpenFile(const std::string& filename);
 
         /// Argumentumok parseolása.
         /**

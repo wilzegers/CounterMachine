@@ -8,6 +8,8 @@
 
 #include <iostream>
 
+#include <QString>
+
 /// A futtatható számlálógép-objektumot tartalmazó osztály.
 struct ComputationHolder
 {
@@ -16,7 +18,7 @@ struct ComputationHolder
      * \param filename a számlálógépet leíró fájl neve.
      * \param input_str a bemeneti paraméterek szövege.
     */
-    ComputationHolder(const std::wstring& filename, const std::string& input_str);
+    ComputationHolder(const QString& filename, const std::string& input_str);
 
     /// A futtatható számlálógép megtekintését biztosító metódus.
     /**
@@ -29,7 +31,7 @@ struct ComputationHolder
     * \param func const Execution::State& paraméterű hívható objektum.
     */
     template<typename Func>
-    void ComputationHolder::StepProgramWith(Func func)
+    void StepProgramWith(Func func)
     {
         comp.StepWith(func);
     }
@@ -39,7 +41,7 @@ struct ComputationHolder
     * \param func const Execution::State& paraméterű hívható objektum.
     */
     template<typename Func>
-    void ComputationHolder::RunProgramWith(Func func)
+    void RunProgramWith(Func func)
     {
         comp.RunWith(func);
     }
@@ -50,7 +52,7 @@ private:
      * \param filename a számlálógépet leíró fájl neve.
      * \return A felépített számlálógép-leíró.
      */
-    static Descriptors::Computation CreateDescriptor(const std::wstring& filename);
+    static Descriptors::Computation CreateDescriptor(const QString& filename);
     /// A bemeneti regiszterek értékeinek kinyerését végző függvény.
     /**
      * \param input_str a bemeneti paraméterek szövege.

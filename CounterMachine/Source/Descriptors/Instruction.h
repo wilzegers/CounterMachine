@@ -58,7 +58,7 @@ namespace Descriptors
          *  \return megfelelő típusú pointer.
          */
         template <class ActualInstruction>
-        ViewPtr<const ActualInstruction> const As() const
+        ViewPtr<const ActualInstruction> As() const
         {
             if (!IsA<ActualInstruction>())
             {
@@ -99,7 +99,7 @@ namespace Descriptors
         RegisterName reg_name; ///< A növelendő regiszter címe.
 
         static constexpr size_t param_no{ 1 };  ///< Az utasítás számára szükséges paraméterek.
-        
+
         /// Konstruktor.
         /**
          * \param reg_name a növelendő regiszter címe.

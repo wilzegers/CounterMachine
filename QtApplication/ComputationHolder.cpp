@@ -1,17 +1,30 @@
 #include "ComputationHolder.h"
 
+#include <sstream>
+
+#include <QFile>
+#include <QString>
+#include <QTextStream>
+
 #include "Processing/Parser.h"
 #include "Processing/InputParser.h"
 
-ComputationHolder::ComputationHolder(const std::wstring& filename, const std::string& input_str)
+ComputationHolder::ComputationHolder(const QString& filename, const std::string& input_str)
     : comp_descriptor{CreateDescriptor(filename)},
       comp{comp_descriptor, ParseInputs(input_str)}
 {
 }
 
-Descriptors::Computation ComputationHolder::CreateDescriptor(const std::wstring& filename)
+Descriptors::Computation ComputationHolder::CreateDescriptor(const QString& filename)
 {
-    Processing::Parser parser{filename};
+    QFile input{filename};
+    input.open(QIODevice::ReadOnly | QIODevice::Text);
+    if (!input.isOpen())
+    {
+            throw std::runtime_error{"Error while opening file"};
+    }
+    auto input_string = QTextStream{&input}.readAll().toStdString();
+    Processing::Parser parser{std::make_unique<std::stringstream>(input_string)};
     parser.Parse();
     return parser.GetResultComputation();
 }
