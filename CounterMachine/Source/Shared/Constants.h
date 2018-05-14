@@ -44,8 +44,8 @@ namespace Constants
         static constexpr ConstStr input_reg_count_mismatch  = "the input value count (%1%) does not match the input register count (%2%)";
         static constexpr ConstStr input_reg_name_mismatch   = "the input register \'%1%\' does not exist";  
 
-        static constexpr ConstStr nonexistant_register      = "trying to access nonexistant register no. %1%.";
-        static constexpr ConstStr instruction_out_of_range  = "trying to run nonexistant instruction no. %1%.";
+        static constexpr ConstStr nonexistant_register      = "trying to access nonexistent register no. %1%.";
+        static constexpr ConstStr instruction_out_of_range  = "trying to run nonexistent instruction no. %1%.";
 
         static constexpr ConstStr message_suffix            = " - in the %1%, line %2%.";
     }

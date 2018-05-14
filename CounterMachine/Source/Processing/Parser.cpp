@@ -1,5 +1,3 @@
-#pragma once
-
 #include "Processing/Parser.h"
 
 namespace Processing

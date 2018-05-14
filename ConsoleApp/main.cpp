@@ -10,7 +10,7 @@ int main(int argc, char* argv[])
         Processing::InputParser ip(argc, argv);
         ip.Parse();
 
-        Processing::Parser p(L"example2.cm");
+        Processing::Parser p("example2.cm");
         p.Parse();
         Execution::Computation c{ p.GetResultComputation(), ip.GetInits() };
         c.Run();
